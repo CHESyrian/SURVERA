@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Report response" %} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Report response" %}</h1>
+    <p class="sv-muted mb-0">{{ survey.title }} · #{{ response_obj.pk }}
+      {% if response_obj.participant %}· {{ response_obj.participant.email }}{% endif %}
+    </p>
+  </div>
+  <a href="{% url 'responses:list' survey.pk %}" class="btn btn-ghost btn-sm">{% trans "Cancel" %}</a>
+</div>
+<div class="sv-card" style="max-width:32rem;">
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">{% trans "Submit report" %}</button>
+  </form>
+</div>
+{% endblock %}

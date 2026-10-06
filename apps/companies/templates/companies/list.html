@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}<div class="sv-page-head"><div><h1>{% trans "My companies" %}</h1></div>
+<a href="{% url 'companies:create' %}" class="btn btn-primary">{% trans "Create company" %}</a></div>
+{% if memberships %}<div class="sv-card" style="padding:0;overflow:hidden;"><table class="sv-table"><thead><tr><th>{% trans "Company" %}</th><th>{% trans "Role" %}</th><th></th></tr></thead><tbody>
+{% for m in memberships %}<tr><td><strong>{{ m.company.name }}</strong></td><td><span class="sv-chip">{{ m.get_role_display }}</span></td>
+<td style="text-align:end;"><a href="{% url 'companies:team' m.company.pk %}" class="btn btn-ghost btn-sm">{% trans "Team" %}</a></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="sv-card"><p class="sv-muted">{% trans "You are not in any company yet." %}</p>
+<p><a href="{% url 'companies:create' %}" class="btn btn-primary">{% trans "Create company" %}</a></p></div>{% endif %}{% endblock %}

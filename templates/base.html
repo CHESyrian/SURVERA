@@ -1,0 +1,297 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SURVERA{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/survera-logo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/survera-logo.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/survera.css' %}">
+    <script>
+    (function(){try{var t=localStorage.getItem('sv-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-bs-theme',t);}}catch(e){}})();
+    </script>
+    <script src="https://unpkg.com/htmx.org@2.0.2" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="sv-body sv-sidebar-collapsed"
+      x-data="{
+        mobileOpen: false,
+        closeMobile() { this.mobileOpen = false; }
+      }"
+      :class="{ 'sv-sidebar-mobile-open': mobileOpen }">
+
+    {# Mobile top bar #}
+    <header class="sv-mobile-bar d-lg-none">
+        <button type="button" class="sv-sidebar-toggle" @click="mobileOpen = !mobileOpen"
+                :aria-expanded="mobileOpen" aria-label="{% trans 'Menu' %}">
+            <span class="sv-toggler-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="sv-mobile-brand" href="{% url 'home' %}" hx-boost="false" title="SURVERA">
+            <img src="{% static 'images/survera-brand.png' %}" alt="SURVERA" class="sv-brand-img sv-brand-img-mobile">
+        </a>
+        <div class="sv-mobile-actions">
+            {% if user.is_authenticated %}
+            <a class="sv-notif-bell" href="{% url 'notifications:list' %}" hx-boost="false"
+               title="{% trans 'Notifications' %}" aria-label="{% trans 'Notifications' %}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span id="sv-notif-badge-slot-mobile"
+                      hx-get="{% url 'notifications:badge' %}"
+                      hx-trigger="load, every 45s"
+                      hx-swap="innerHTML">
+                  {% if notif_unread %}<span class="sv-notif-badge">{{ notif_unread }}</span>{% endif %}
+                </span>
+            </a>
+            {% endif %}
+        </div>
+    </header>
+
+    {# Backdrop for mobile drawer #}
+    <div class="sv-sidebar-backdrop d-lg-none" x-show="mobileOpen" x-transition.opacity @click="closeMobile()" x-cloak></div>
+
+    {# Left sidebar #}
+    <aside class="sv-sidebar" :aria-label="{% trans 'Main navigation' %}">
+        <div class="sv-sidebar-inner">
+            <div class="sv-sidebar-top">
+                <a class="sv-brand sv-sidebar-brand" href="{% url 'home' %}" hx-boost="false" title="SURVERA" aria-label="SURVERA" @click="closeMobile()">
+                    <img src="{% static 'images/survera-brand.png' %}" alt="SURVERA" class="sv-brand-img sv-brand-img-full">
+                    <img src="{% static 'images/survera-logo.png' %}" alt="SURVERA" class="sv-brand-img sv-brand-img-mark">
+                </a>
+            </div>
+
+            <nav class="sv-sidebar-nav">
+                <ul class="sv-side-links">
+                    <li>
+                        <a class="sv-side-link{% if request.resolver_match.namespace == 'surveys' and request.resolver_match.url_name == 'discover' %} active{% endif %}"
+                           href="{% url 'surveys:discover' %}" hx-boost="false" @click="closeMobile()"
+                           title="{% trans 'Discover' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "Discover" %}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sv-side-link{% if request.resolver_match.namespace == 'rewards' and request.resolver_match.url_name == 'tasks' %} active{% endif %}"
+                           href="{% url 'rewards:tasks' %}" hx-boost="false" @click="closeMobile()"
+                           title="{% trans 'Tasks' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "Tasks" %}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sv-side-link{% if request.resolver_match.namespace == 'rewards' and request.resolver_match.url_name == 'leaderboard' %} active{% endif %}"
+                           href="{% url 'rewards:leaderboard' %}" hx-boost="false" @click="closeMobile()"
+                           title="{% trans 'Leaderboard' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 8H4a2 2 0 0 1-2-2V5h3"/><path d="M19 8h1a2 2 0 0 0 2-2V5h-3"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "Leaderboard" %}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sv-side-link{% if request.resolver_match.namespace == 'companies' %} active{% endif %}"
+                           href="{% url 'companies:list' %}" hx-boost="false" @click="closeMobile()"
+                           title="{% trans 'Companies' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "Companies" %}</span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="sv-side-link{% if request.resolver_match.namespace == 'surveys' and request.resolver_match.url_name != 'discover' %} active{% endif %}"
+                           href="{% url 'surveys:list' %}" hx-boost="false" @click="closeMobile()"
+                           title="{% trans 'My surveys' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "My surveys" %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <div class="sv-sidebar-bottom">
+                <div class="sv-sidebar-tools">
+                    <form action="{% url 'set_language' %}" method="post" class="sv-side-lang" hx-boost="false">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <select name="language" class="form-select form-select-sm sv-lang" onchange="this.form.submit()" aria-label="{% trans 'Language' %}">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang_code, lang_name in LANGUAGES %}
+                                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>{{ lang_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    <button type="button" class="sv-theme-toggle" id="theme-toggle" aria-label="{% trans 'Toggle theme' %}" title="{% trans 'Toggle theme' %}">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                        </svg>
+                    </button>
+                </div>
+
+                {% if user.is_authenticated %}
+                <div class="sv-sidebar-user">
+                    <a class="sv-side-link sv-side-user" href="{% url 'accounts:profile' %}" hx-boost="false" @click="closeMobile()"
+                       title="{{ user.email }}">
+                        <span class="sv-side-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </span>
+                        <span class="sv-side-label">{{ user.username|capfirst }}</span>
+                    </a>
+                    <a class="sv-side-link sv-side-notif d-none d-lg-flex" href="{% url 'notifications:list' %}" hx-boost="false"
+                       title="{% trans 'Notifications' %}" aria-label="{% trans 'Notifications' %}">
+                        <span class="sv-side-icon sv-notif-bell-inline" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span id="sv-notif-badge-slot"
+                                  hx-get="{% url 'notifications:badge' %}"
+                                  hx-trigger="load, every 45s"
+                                  hx-swap="innerHTML">
+                              {% if notif_unread %}<span class="sv-notif-badge">{{ notif_unread }}</span>{% endif %}
+                            </span>
+                        </span>
+                        <span class="sv-side-label">{% trans "Notifications" %}</span>
+                    </a>
+                    <form action="{% url 'accounts:logout' %}" method="post" class="sv-side-logout" hx-boost="false">
+                        {% csrf_token %}
+                        <button type="submit" class="sv-side-link sv-side-logout-btn sv-auth-logout" title="{% trans 'Log out' %}">
+                            <span class="sv-side-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            </span>
+                            <span class="sv-side-label">{% trans "Log out" %}</span>
+                        </button>
+                    </form>
+                    {% if user.is_staff %}
+                    <a class="sv-side-link" href="{% url 'admin:index' %}" hx-boost="false" @click="closeMobile()" title="{% trans 'Admin' %}">
+                        <span class="sv-side-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        </span>
+                        <span class="sv-side-label">{% trans "Admin" %}</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="sv-sidebar-auth">
+                    <a class="sv-side-link sv-auth-login" href="{% url 'accounts:login' %}" hx-boost="false" @click="closeMobile()" title="{% trans 'Log in' %}">
+                        <span class="sv-side-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                        </span>
+                        <span class="sv-side-label">{% trans "Log in" %}</span>
+                    </a>
+                    <a class="sv-side-link sv-auth-register" href="{% url 'accounts:register' %}" hx-boost="false" @click="closeMobile()" title="{% trans 'Register' %}">
+                        <span class="sv-side-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                        </span>
+                        <span class="sv-side-label">{% trans "Register" %}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </aside>
+
+    <div class="sv-main-wrap">
+        <main class="flex-grow-1 py-4">
+            <div class="container">
+                {% if user.is_authenticated and not user.is_email_verified and not user.is_superuser %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {% trans "Your email is not verified. Verify to take surveys, earn coins/XP, export data, and create companies." %}
+                        <a href="{% url 'accounts:verify_email' %}" class="alert-link">{% trans "Verify now" %}</a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+                    </div>
+                {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'debug' %}secondary{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+
+        <footer class="sv-footer mt-auto">
+            <div class="container">
+                <div class="sv-footer-grid">
+                    <div class="sv-footer-brand">
+                        <a class="sv-brand" href="{% url 'home' %}" hx-boost="false" title="SURVERA" aria-label="SURVERA">
+                            <img src="{% static 'images/survera-brand.png' %}" alt="SURVERA" class="sv-brand-img sv-brand-img-footer">
+                        </a>
+                        <p class="sv-footer-tagline mb-0">
+                            {% trans "Surveys that reward participation" %}
+                        </p>
+                    </div>
+                    <div class="sv-footer-col">
+                        <h2 class="sv-footer-heading">{% trans "Explore" %}</h2>
+                        <ul class="sv-footer-links">
+                            <li><a href="{% url 'surveys:discover' %}" hx-boost="false">{% trans "Discover" %}</a></li>
+                            <li><a href="{% url 'rewards:leaderboard' %}" hx-boost="false">{% trans "Leaderboard" %}</a></li>
+                            <li><a href="{% url 'companies:list' %}" hx-boost="false">{% trans "Companies" %}</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'surveys:list' %}" hx-boost="false">{% trans "My surveys" %}</a></li>
+                            {% else %}
+                            <li><a href="{% url 'accounts:register' %}" hx-boost="false">{% trans "Create account" %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="sv-footer-col">
+                        <h2 class="sv-footer-heading">{% trans "Account" %}</h2>
+                        <ul class="sv-footer-links">
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'accounts:profile' %}" hx-boost="false">{% trans "Profile" %}</a></li>
+                            <li><a href="{% url 'surveys:create' %}" hx-boost="false">{% trans "Create survey" %}</a></li>
+                            {% else %}
+                            <li><a href="{% url 'accounts:login' %}" hx-boost="false">{% trans "Log in" %}</a></li>
+                            <li><a href="{% url 'accounts:register' %}" hx-boost="false">{% trans "Register" %}</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'companies:create' %}" hx-boost="false">{% trans "Start a company" %}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sv-footer-bottom">
+                    <span>© {% now "Y" %} SURVERA</span>
+                    <span class="sv-footer-sep" aria-hidden="true">·</span>
+                    <span>{% trans "XP builds levels. Points come from paid surveys." %}</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+    (function(){
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      function cur(){ return document.documentElement.getAttribute('data-theme') || 'light'; }
+      function apply(t){
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-bs-theme', t);
+        try { localStorage.setItem('sv-theme', t); } catch(e) {}
+      }
+      apply(cur());
+      btn.addEventListener('click', function(){ apply(cur() === 'dark' ? 'light' : 'dark'); });
+    })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load i18n humanize %}
+<article class="sv-notif-item{% if not n.is_read %} is-unread{% endif %}">
+  <div class="sv-notif-main">
+    <a class="sv-notif-title" href="{% url 'notifications:open' n.pk %}" hx-boost="false">
+      {{ n.title }}
+    </a>
+    {% if n.body %}
+    <p class="sv-notif-body mb-0">{{ n.body }}</p>
+    {% endif %}
+    <time class="sv-notif-time" datetime="{{ n.created_at|date:'c' }}">{{ n.created_at|naturaltime }}</time>
+  </div>
+  <div class="sv-notif-actions">
+    {% if not n.is_read %}
+    <form method="post" action="{% url 'notifications:mark_read' n.pk %}" hx-boost="false">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'notifications:list' %}">
+      <button type="submit" class="btn btn-ghost btn-sm">{% trans "Mark read" %}</button>
+    </form>
+    {% else %}
+    <span class="sv-chip">{% trans "Read" %}</span>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>SURVERA</title></head>
+<body style="font-family: system-ui, sans-serif; line-height: 1.5; color: #0f172a;">
+  <p>Hi {{ user.username|default:user.email }},</p>
+
+  {% if role == "reporter" %}
+    {% if outcome == "dismissed" %}
+    <p>Your report on the survey <strong>{{ survey_title }}</strong> ({{ report_type }}) was reviewed and <strong>dismissed</strong>. No penalty was applied.</p>
+    {% else %}
+    <p>Your report on the survey <strong>{{ survey_title }}</strong> ({{ report_type }}) was reviewed. A <strong>penalty was applied</strong> to the respondent.</p>
+    {% endif %}
+  {% else %}
+    <p>A report on your response to <strong>{{ survey_title }}</strong> ({{ report_type }}) was upheld.</p>
+    {% if penalty_summary.warning_number %}
+    <p>This is formal warning <strong>#{{ penalty_summary.warning_number }}</strong>.</p>
+    {% endif %}
+    {% if penalty_summary.honor_deducted %}
+    <p>Honor points deducted: <strong>{{ penalty_summary.honor_deducted }}</strong></p>
+    {% endif %}
+    {% if penalty_summary.rank_from and penalty_summary.rank_to %}
+    <p>Trust rank reduced: <strong>{{ penalty_summary.rank_from }} → {{ penalty_summary.rank_to }}</strong></p>
+    {% endif %}
+    {% if penalty_summary.frozen_until %}
+    <p>Account frozen until: <strong>{{ penalty_summary.frozen_until }}</strong></p>
+    {% endif %}
+    {% if penalty_summary.permanently_closed %}
+    <p><strong>Your account has been permanently closed.</strong></p>
+    {% endif %}
+    {% if penalty_summary.points_deducted %}
+    <p>Survey points deducted: <strong>{{ penalty_summary.points_deducted }}</strong></p>
+    {% endif %}
+  {% endif %}
+
+  {% if resolution_note %}
+  <p style="background:#f8fafc;padding:0.75rem 1rem;border-radius:0.5rem;border:1px solid #e2e8f0;">
+    <strong>Staff note:</strong> {{ resolution_note }}
+  </p>
+  {% endif %}
+
+  {% if action_url and not penalty_summary.permanently_closed %}
+  <p>
+    <a href="{{ action_url }}" style="display:inline-block;padding:0.6rem 1rem;background:#2563eb;color:#fff;text-decoration:none;border-radius:0.5rem;">
+      Open SURVERA
+    </a>
+  </p>
+  {% endif %}
+  <p style="color:#64748b;font-size:0.85rem;">— {{ site_name }}</p>
+</body>
+</html>

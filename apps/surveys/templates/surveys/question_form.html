@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ title }} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-card" style="max-width:720px;margin:0 auto;"
+     x-data="{
+       type: '{% if form.type.value %}{{ form.type.value }}{% elif question %}{{ question.type }}{% else %}text{% endif %}',
+       needsChoices() {
+         return ['single_choice', 'multiple_choice', 'ranking'].includes(this.type);
+       },
+       needsMatrix() { return this.type === 'matrix'; },
+       needsRating() { return this.type === 'rating'; },
+       needsScale() { return this.type === 'scale' || this.type === 'number'; },
+       needsTextOpts() { return this.type === 'text'; }
+     }">
+  <h1>{{ title }}</h1>
+  <p class="sv-muted">{{ survey.title }}</p>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.type.id_for_label }}">{{ form.type.label }}</label>
+      <select name="{{ form.type.name }}" id="{{ form.type.id_for_label }}" class="form-select"
+              x-model="type">
+        {% for value, label in form.fields.type.choices %}
+          {% if value %}
+          <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>{{ label }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      {% if form.type.errors %}<div class="text-danger small">{{ form.type.errors }}</div>{% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
+      {{ form.text }}
+      {% if form.text.errors %}<div class="text-danger small">{{ form.text.errors }}</div>{% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.help_text.id_for_label }}">{{ form.help_text.label }}</label>
+      {{ form.help_text }}
+      {% if form.help_text.errors %}<div class="text-danger small">{{ form.help_text.errors }}</div>{% endif %}
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-md-6">
+        <div class="form-check mt-2">
+          {{ form.is_required }}
+          <label class="form-check-label" for="{{ form.is_required.id_for_label }}">{{ form.is_required.label }}</label>
+        </div>
+        {% if form.is_required.errors %}<div class="text-danger small">{{ form.is_required.errors }}</div>{% endif %}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="{{ form.order.id_for_label }}">{{ form.order.label }}</label>
+        {{ form.order }}
+        {% if form.order.errors %}<div class="text-danger small">{{ form.order.errors }}</div>{% endif %}
+      </div>
+    </div>
+
+    {# Type-specific config #}
+    <div class="sv-callout sv-callout-info mb-3" x-show="needsChoices()" x-cloak>
+      <label class="form-label" for="{{ form.choices_text.id_for_label }}">
+        <span x-text="type === 'ranking' ? '{% trans "Items to rank (one per line)" %}' : '{% trans "Choices (one per line)" %}'"></span>
+      </label>
+      {{ form.choices_text }}
+      <div class="form-text">{{ form.choices_text.help_text }}</div>
+      {% if form.choices_text.errors %}<div class="text-danger small">{{ form.choices_text.errors }}</div>{% endif %}
+    </div>
+
+    <div class="sv-callout sv-callout-info mb-3" x-show="needsMatrix()" x-cloak>
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.matrix_rows.id_for_label }}">{{ form.matrix_rows.label }}</label>
+        {{ form.matrix_rows }}
+        {% if form.matrix_rows.errors %}<div class="text-danger small">{{ form.matrix_rows.errors }}</div>{% endif %}
+      </div>
+      <div>
+        <label class="form-label" for="{{ form.matrix_columns.id_for_label }}">{{ form.matrix_columns.label }}</label>
+        {{ form.matrix_columns }}
+        {% if form.matrix_columns.errors %}<div class="text-danger small">{{ form.matrix_columns.errors }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="sv-callout sv-callout-info mb-3" x-show="needsRating()" x-cloak>
+      <label class="form-label" for="{{ form.rating_max.id_for_label }}">{{ form.rating_max.label }}</label>
+      {{ form.rating_max }}
+      {% if form.rating_max.errors %}<div class="text-danger small">{{ form.rating_max.errors }}</div>{% endif %}
+    </div>
+
+    <div class="sv-callout sv-callout-info mb-3" x-show="needsScale()" x-cloak>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label" for="{{ form.scale_min.id_for_label }}">{{ form.scale_min.label }}</label>
+          {{ form.scale_min }}
+          {% if form.scale_min.errors %}<div class="text-danger small">{{ form.scale_min.errors }}</div>{% endif %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="{{ form.scale_max.id_for_label }}">{{ form.scale_max.label }}</label>
+          {{ form.scale_max }}
+          {% if form.scale_max.errors %}<div class="text-danger small">{{ form.scale_max.errors }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-callout sv-callout-info mb-3" x-show="needsTextOpts()" x-cloak>
+      <div class="form-check">
+        {{ form.text_multiline }}
+        <label class="form-check-label" for="{{ form.text_multiline.id_for_label }}">{{ form.text_multiline.label }}</label>
+      </div>
+      {% if form.text_multiline.errors %}<div class="text-danger small">{{ form.text_multiline.errors }}</div>{% endif %}
+    </div>
+
+    {# Conditional logic #}
+    <div class="border-top pt-3 mt-2 mb-3">
+      <h2 class="h6 mb-3">{% trans "Conditional display (optional)" %}</h2>
+      <p class="sv-muted small mb-3">
+        {% trans "This question stays hidden until the source question’s answer matches the condition (e.g. Equals → Yes)." %}
+      </p>
+      <div class="mb-3">
+        <label class="form-label" for="{{ form.condition_source.id_for_label }}">{{ form.condition_source.label }}</label>
+        {{ form.condition_source }}
+        <div class="form-text">{{ form.condition_source.help_text }}</div>
+        {% if form.condition_source.errors %}<div class="text-danger small">{{ form.condition_source.errors }}</div>{% endif %}
+      </div>
+      <div class="row g-3">
+        <div class="col-md-5">
+          <label class="form-label" for="{{ form.condition_op.id_for_label }}">{{ form.condition_op.label }}</label>
+          <select name="{{ form.condition_op.name }}" id="{{ form.condition_op.id_for_label }}"
+                  class="form-select" x-ref="condOp">
+            {% for value, label in form.fields.condition_op.choices %}
+            <option value="{{ value }}" {% if form.condition_op.value == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+          {% if form.condition_op.errors %}<div class="text-danger small">{{ form.condition_op.errors }}</div>{% endif %}
+        </div>
+        <div class="col-md-7">
+          <label class="form-label" for="{{ form.condition_value.id_for_label }}">{{ form.condition_value.label }}</label>
+          {{ form.condition_value }}
+          <div class="form-text">
+            {% trans "For Yes/No questions use exactly: Yes or No. For choices, type the option text. Matching is case-insensitive." %}
+          </div>
+          {% if form.condition_value.errors %}<div class="text-danger small">{{ form.condition_value.errors }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <a href="{% url 'surveys:detail' survey.pk %}" class="btn btn-ghost">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</div>
+<style>
+  [x-cloak] { display: none !important; }
+  .form-check-input { margin-right: 0.4rem; }
+</style>
+{% endblock %}

@@ -1,0 +1,1111 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SURVERA 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-28 12:11+0000\n"
+"PO-Revision-Date: 2026-08-28 12:11+0000\n"
+"Last-Translator: SURVERA Team\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "0–100. 0 means no trust filter."
+msgstr "0–100. القيمة 0 تعني عدم تطبيق فلتر الثقة."
+
+msgid "0–100. Used for survey targeting."
+msgstr "0–100. تُستخدم لاستهداف الاستبيانات."
+
+msgid "Account details"
+msgstr "تفاصيل الحساب"
+
+msgid "Active"
+msgstr "نشط"
+
+msgid "Add"
+msgstr "إضافة"
+
+msgid ""
+"Add date of birth and gender to complete your profile (XP bonus) and unlock "
+"targeted surveys."
+msgstr ""
+"أضف تاريخ الميلاد والجنس لإكمال ملفك (مكافأة خبرة) وفتح الاستبيانات "
+"المستهدفة."
+
+msgid "Add member"
+msgstr "إضافة عضو"
+
+msgid "Add question"
+msgstr "إضافة سؤال"
+
+msgid "Admin"
+msgstr "المشرف"
+
+msgid "Admin (legacy)"
+msgstr "مشرف (قديم)"
+
+msgid "Age: %(a)s–%(b)s"
+msgstr "العمر: %(a)s–%(b)s"
+
+msgid "All"
+msgstr "الكل"
+
+msgid "All companies"
+msgstr "كل الشركات"
+
+msgid "allow anonymous"
+msgstr "السماح بالمجهول"
+
+msgid "Already completed"
+msgstr "مكتمل مسبقاً"
+
+msgid "Already have an account?"
+msgstr "لديك حساب بالفعل؟"
+
+msgid "An account with this email already exists."
+msgstr "يوجد حساب بهذا البريد الإلكتروني بالفعل."
+
+msgid "Analyst"
+msgstr "محلل"
+
+msgid "Analytics"
+msgstr "التحليلات"
+
+msgid "Answer Yes or No."
+msgstr "أجب بنعم أو لا."
+
+msgid "Audience targeting"
+msgstr "استهداف الجمهور"
+
+msgid "Back"
+msgstr "رجوع"
+
+msgid "Back to profile"
+msgstr "العودة للملف"
+
+msgid "Badge bonus"
+msgstr "مكافأة شارة"
+
+msgid "Badges"
+msgstr "الشارات"
+
+msgid ""
+"Browse public surveys, filter by category or pricing, and share your "
+"answers."
+msgstr "تصفح الاستبيانات العامة، وصفِّ حسب الفئة أو التسعير، وشارك إجاباتك."
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cannot assign owner this way."
+msgstr "لا يمكن تعيين المالك بهذه الطريقة."
+
+msgid "Cannot assign owner via invite."
+msgstr "لا يمكن تعيين المالك عبر الدعوة."
+
+msgid "Cannot change the owner role here."
+msgstr "لا يمكن تغيير دور المالك هنا."
+
+msgid "Cannot publish a deleted survey."
+msgstr "لا يمكن نشر استبيان محذوف."
+
+msgid "Cannot publish a survey with no questions."
+msgstr "لا يمكن نشر استبيان بلا أسئلة."
+
+msgid "Cannot remove the owner."
+msgstr "لا يمكن إزالة المالك."
+
+msgid "Category"
+msgstr "الفئة"
+
+msgid "category"
+msgstr "الفئة"
+
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Choices (one per line)"
+msgstr "الخيارات (سطر لكل خيار)"
+
+msgid "Choices / items (one per line)"
+msgstr "الخيارات / العناصر (سطر لكل بند)"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Closed"
+msgstr "مغلق"
+
+msgid "Companies"
+msgstr "الشركات"
+
+msgid "companies"
+msgstr "شركات"
+
+msgid ""
+"Companies create free or paid surveys. People discover and take surveys to "
+"earn XP and points."
+msgstr ""
+"الشركات تنشئ استبيانات مجانية أو مدفوعة. والأشخاص يكتشفون الاستبيانات "
+"ويجيبون عليها لكسب نقاط الخبرة والنقاط."
+
+msgid ""
+"Companies create free or paid surveys. People take surveys and earn XP (and "
+"points on paid ones)."
+msgstr ""
+"الشركات تنشئ استبيانات مجانية أو مدفوعة. والأشخاص يجيبون ويكسبون نقاط خبرة "
+"(ونقاطاً في المدفوعة)."
+
+msgid ""
+"Companies run research. People share opinions and earn XP — and points on "
+"paid surveys."
+msgstr ""
+"الشركات تُجري أبحاثاً. والأشخاص يشاركون آراءهم ويكسبون نقاط الخبرة — ونقاطاً"
+" في الاستبيانات المدفوعة."
+
+msgid "Company"
+msgstr "الشركة"
+
+msgid "company"
+msgstr "شركة"
+
+msgid "Company member"
+msgstr "عضو شركة"
+
+msgid "Company Member"
+msgstr "عضو شركة"
+
+msgid "Company members only"
+msgstr "أعضاء الشركة فقط"
+
+msgid "Company name"
+msgstr "اسم الشركة"
+
+msgid "Company name is required."
+msgstr "اسم الشركة مطلوب."
+
+msgid "Company “%(name)s” created. You are the owner."
+msgstr "تم إنشاء الشركة «%(name)s». أنت المالك."
+
+msgid "Company: SURVERA"
+msgstr "الشركة: SURVERA"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Condition"
+msgstr "الشرط"
+
+msgid "Conditional display (optional)"
+msgstr "عرض شرطي (اختياري)"
+
+msgid "Confirm password"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Create"
+msgstr "إنشاء"
+
+msgid "Create & publish"
+msgstr "أنشئ وانشر"
+
+msgid "Create a company"
+msgstr "إنشاء شركة"
+
+msgid "Create a company first, then you can create surveys."
+msgstr "أنشئ شركة أولاً ثم يمكنك إنشاء الاستبيانات."
+
+msgid "Create account"
+msgstr "إنشاء حساب"
+
+msgid "Create company"
+msgstr "إنشاء شركة"
+
+msgid "Create survey"
+msgstr "إنشاء استبيان"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Current password"
+msgstr "كلمة المرور الحالية"
+
+msgid "Customer feedback"
+msgstr "ملاحظات العملاء"
+
+msgid "Daily login"
+msgstr "تسجيل دخول يومي"
+
+msgid "Date"
+msgstr "تاريخ"
+
+msgid "Date of birth"
+msgstr "تاريخ الميلاد"
+
+msgid "date of birth"
+msgstr "تاريخ الميلاد"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "description"
+msgstr "الوصف"
+
+msgid "Discover"
+msgstr "اكتشف"
+
+msgid "Discover & take"
+msgstr "اكتشف وشارك"
+
+msgid "Discover surveys"
+msgstr "اكتشف الاستبيانات"
+
+msgid "Does not equal"
+msgstr "لا يساوي"
+
+msgid "Don't have an account?"
+msgstr "ليس لديك حساب؟"
+
+msgid "Done"
+msgstr "تم"
+
+msgid "Draft"
+msgstr "مسودة"
+
+msgid ""
+"Draft surveys stay on My surveys only. Add questions, then Publish to list "
+"them on Discover (if public)."
+msgstr ""
+"المسودات تبقى في استبياناتي فقط. أضف أسئلة ثم انشر ليظهر في اكتشف (إن كان "
+"عاماً)."
+
+msgid "Earn & export"
+msgstr "اكسب وصدّر"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit profile settings"
+msgstr "تعديل إعدادات الملف"
+
+msgid "Edit question"
+msgstr "تعديل السؤال"
+
+msgid "Edit survey"
+msgstr "تعديل الاستبيان"
+
+msgid "Education"
+msgstr "تعليم"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "email address"
+msgstr "البريد الإلكتروني"
+
+msgid "Email is required."
+msgstr "البريد الإلكتروني مطلوب."
+
+msgid "Enter a valid number."
+msgstr "أدخل رقماً صالحاً."
+
+msgid ""
+"Enter survey information only. You can add questions after saving, then "
+"publish when ready."
+msgstr ""
+"أدخل معلومات الاستبيان فقط. يمكنك إضافة الأسئلة بعد الحفظ ثم النشر عند "
+"الجاهزية."
+
+msgid "Equals"
+msgstr "يساوي"
+
+msgid "Events"
+msgstr "فعاليات"
+
+msgid "expires at"
+msgstr "ينتهي في"
+
+msgid "Export CSV"
+msgstr "تصدير CSV"
+
+msgid "Export results"
+msgstr "تصدير النتائج"
+
+msgid "Featured surveys"
+msgstr "استبيانات مميزة"
+
+msgid "Female"
+msgstr "أنثى"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "Free"
+msgstr "مجاني"
+
+msgid "Frozen"
+msgstr "مجمّد"
+
+msgid ""
+"Gain XP on every activity. Paid completions grant points. Owners track "
+"analytics and CSV export."
+msgstr ""
+"اكسب نقاط خبرة مع كل نشاط. الإكمال المدفوع يمنح نقاطاً. المالكون يتابعون "
+"التحليلات ويصدّرون CSV."
+
+msgid "Gender"
+msgstr "الجنس"
+
+msgid "gender"
+msgstr "الجنس"
+
+msgid "Gender: %(g)s"
+msgstr "الجنس: %(g)s"
+
+msgid "Health"
+msgstr "صحة"
+
+msgid "help text"
+msgstr "نص المساعدة"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "How it works"
+msgstr "كيف يعمل"
+
+msgid "HR / workplace"
+msgstr "الموارد البشرية / بيئة العمل"
+
+msgid ""
+"If unchecked, this is a free survey (XP only; public; no points or response "
+"target)."
+msgstr ""
+"إن لم يُحدد، يكون الاستبيان مجانياً (نقاط خبرة فقط؛ عام؛ بلا نقاط أو هدف "
+"ردود)."
+
+msgid "Important dates"
+msgstr "تواريخ مهمة"
+
+msgid "In progress"
+msgstr "قيد التقدم"
+
+msgid "Invalid choice."
+msgstr "خيار غير صالح."
+
+msgid "Invalid matrix answer."
+msgstr "إجابة مصفوفة غير صالحة."
+
+msgid "Invalid role."
+msgstr "دور غير صالح."
+
+msgid "is frozen"
+msgstr "مجمّد"
+
+msgid "Is one of (comma-separated)"
+msgstr "واحد من (مفصولة بفواصل)"
+
+msgid "Items to rank (one per line)"
+msgstr "العناصر للترتيب (سطر لكل عنصر)"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Latest public active surveys"
+msgstr "أحدث الاستبيانات العامة النشطة"
+
+msgid "Leave empty to always show this question."
+msgstr "اتركه فارغاً لإظهار السؤال دائماً."
+
+msgid "Levels & badges"
+msgstr "المستويات والشارات"
+
+msgid "Log in"
+msgstr "تسجيل الدخول"
+
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+msgid "Login required."
+msgstr "يلزم تسجيل الدخول."
+
+msgid "logo"
+msgstr "الشعار"
+
+msgid "Male"
+msgstr "ذكر"
+
+msgid "Manual adjustment"
+msgstr "تعديل يدوي"
+
+msgid "Market research"
+msgstr "أبحاث السوق"
+
+msgid "Matrix"
+msgstr "مصفوفة"
+
+msgid "Matrix columns (one per line)"
+msgstr "أعمدة المصفوفة (سطر لكل عمود)"
+
+msgid "Matrix needs rows and at least 2 columns."
+msgstr "المصفوفة تحتاج صفوفاً وعمودين على الأقل."
+
+msgid "Matrix rows (one per line)"
+msgstr "صفوف المصفوفة (سطر لكل صف)"
+
+msgid "Max must be greater than min."
+msgstr "الحد الأقصى يجب أن يكون أكبر من الأدنى."
+
+msgid "Maximum age"
+msgstr "الحد الأقصى للعمر"
+
+msgid "Maximum age must be greater than or equal to minimum age."
+msgstr "الحد الأقصى للعمر يجب أن يكون أكبر من أو يساوي الأدنى."
+
+msgid "Maximum age: %(n)s"
+msgstr "الحد الأقصى للعمر: %(n)s"
+
+msgid "Member added."
+msgstr "تمت إضافة العضو."
+
+msgid "Member removed."
+msgstr "تمت إزالة العضو."
+
+msgid "Members only"
+msgstr "الأعضاء فقط"
+
+msgid "Menu"
+msgstr "القائمة"
+
+msgid "Minimum age"
+msgstr "الحد الأدنى للعمر"
+
+msgid "Minimum age: %(n)s"
+msgstr "الحد الأدنى للعمر: %(n)s"
+
+msgid "Minimum level"
+msgstr "الحد الأدنى للمستوى"
+
+msgid "Minimum level: %(n)s"
+msgstr "الحد الأدنى للمستوى: %(n)s"
+
+msgid "Minimum trust score"
+msgstr "الحد الأدنى لدرجة الثقة"
+
+msgid "Minimum trust: %(n)s"
+msgstr "الحد الأدنى للثقة: %(n)s"
+
+msgid "Moderator"
+msgstr "مشرف"
+
+msgid "Multi-line text"
+msgstr "نص متعدد الأسطر"
+
+msgid "Multiple choice"
+msgstr "اختيار متعدد"
+
+msgid "My surveys"
+msgstr "استبياناتي"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "name"
+msgstr "الاسم"
+
+msgid "New password"
+msgstr "كلمة المرور الجديدة"
+
+msgid "Newest"
+msgstr "الأحدث"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No badges yet. Complete surveys and level up to unlock them."
+msgstr "لا شارات بعد. أكمل استبيانات وارتفع بالمستوى لفتحها."
+
+msgid ""
+"No public active surveys match. Publish a survey (draft → add questions → "
+"Publish) to list it here for everyone."
+msgstr ""
+"لا توجد استبيانات عامة نشطة مطابقة. انشر استبياناً (مسودة ← أضف أسئلة ← نشر)"
+" ليظهر هنا للجميع."
+
+msgid "No questions yet."
+msgstr "لا توجد أسئلة بعد."
+
+msgid "No responses yet."
+msgstr "لا ردود بعد."
+
+msgid "No surveys match."
+msgstr "لا توجد استبيانات مطابقة."
+
+msgid "No surveys yet."
+msgstr "لا توجد استبيانات بعد."
+
+msgid "No user with that email. They must register first."
+msgstr "لا يوجد مستخدم بهذا البريد. يجب أن يسجّل أولاً."
+
+msgid "Number"
+msgstr "رقم"
+
+msgid "Oldest"
+msgstr "الأقدم"
+
+msgid "Only company members can take this survey."
+msgstr "أعضاء الشركة فقط يمكنهم الإجابة على هذا الاستبيان."
+
+msgid ""
+"Only company owners/moderators can create surveys. Create or join a company "
+"first."
+msgstr ""
+"فقط مالكو/مشرفو الشركات يمكنهم إنشاء استبيانات. أنشئ شركة أو انضم إليها "
+"أولاً."
+
+msgid "Only draft surveys can be published."
+msgstr "يمكن نشر المسودات فقط."
+
+msgid "Only members of this company can take this survey."
+msgstr "أعضاء هذه الشركة فقط يمكنهم الإجابة."
+
+msgid "order"
+msgstr "الترتيب"
+
+msgid "Other"
+msgstr "أخرى"
+
+msgid "Owner"
+msgstr "مالك"
+
+msgid "Owners export results and track basic analytics."
+msgstr "المالكون يصدّرون النتائج ويتابعون تحليلات أساسية."
+
+msgid "Owners publish, track analytics, and export results as CSV."
+msgstr "المالكون ينشرون ويتابعون التحليلات ويصدّرون النتائج كـ CSV."
+
+msgid "Owning company. Null only for limited Person-created surveys."
+msgstr "الشركة المالكة."
+
+msgid "Pagination"
+msgstr "ترقيم الصفحات"
+
+msgid "Paid"
+msgstr "مدفوع"
+
+msgid "paid survey"
+msgstr "استبيان مدفوع"
+
+msgid "Paid survey (can reward points)"
+msgstr "استبيان مدفوع (يمكنه منح نقاط)"
+
+msgid "Paid survey rewards"
+msgstr "مكافآت الاستبيانات المدفوعة"
+
+msgid "Paid surveys may grant points. Free surveys grant XP only."
+msgstr "الاستبيانات المدفوعة قد تمنح نقاطاً. المجانية تمنح نقاط خبرة فقط."
+
+msgid "Participant"
+msgstr "مشارك"
+
+msgid "Participants complete surveys and earn XP (and points on paid ones)."
+msgstr "المشاركون يكملون الاستبيانات ويكسبون نقاط خبرة (ونقاطاً في المدفوعة)."
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Paused"
+msgstr "موقوف"
+
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+msgid "Person"
+msgstr "شخص"
+
+msgid "Personal info"
+msgstr "معلومات شخصية"
+
+msgid "Please answer all visible required questions."
+msgstr "يرجى الإجابة على كل الأسئلة المطلوبة الظاهرة."
+
+msgid "Please log in to take this survey."
+msgstr "يرجى تسجيل الدخول للإجابة على هذا الاستبيان."
+
+msgid "Please set your date of birth in your profile."
+msgstr "يرجى تعيين تاريخ ميلادك في ملفك الشخصي."
+
+msgid "Please set your gender in your profile."
+msgstr "يرجى تعيين جنسك في ملفك الشخصي."
+
+msgid "Points"
+msgstr "نقاط"
+
+msgid ""
+"Points given to participant on successful completion (paid surveys only)."
+msgstr "نقاط تُمنح للمشارك عند الإكمال الناجح (للمدفوعة فقط)."
+
+msgid "points reward"
+msgstr "مكافأة النقاط"
+
+msgid "Politics / public opinion"
+msgstr "سياسة / رأي عام"
+
+msgid "Prefer not to say"
+msgstr "أفضل عدم الإفصاح"
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Pricing"
+msgstr "التسعير"
+
+msgid "Private"
+msgstr "خاص"
+
+msgid "Private (invite / targeted only)"
+msgstr "خاص (دعوة / استهداف فقط)"
+
+msgid "Private · not on Discover"
+msgstr "خاص · ليس في اكتشف"
+
+msgid "Product"
+msgstr "منتج"
+
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+msgid "Profile completed"
+msgstr "اكتمال الملف"
+
+msgid "Profile information"
+msgstr "معلومات الملف"
+
+msgid "Profile settings"
+msgstr "إعدادات الملف"
+
+msgid "Profile updated."
+msgstr "تم تحديث الملف الشخصي."
+
+msgid "Progress will appear after your first activity."
+msgstr "سيظهر التقدم بعد أول نشاط لك."
+
+msgid "Provide a value for this condition."
+msgstr "أدخل قيمة لهذا الشرط."
+
+msgid "Provide at least 2 choices."
+msgstr "أدخل خيارين على الأقل."
+
+msgid "Provide at least 2 items to rank."
+msgstr "أدخل عنصرين على الأقل للترتيب."
+
+msgid "Pts"
+msgstr "نقاط"
+
+msgid "pts"
+msgstr "نقاط"
+
+msgid "Public"
+msgstr "عام"
+
+msgid "Public (discoverable)"
+msgstr "عام (قابل للاكتشاف)"
+
+msgid ""
+"Public surveys appear on Discover. Private surveys are invite/targeted only."
+msgstr "الاستبيانات العامة تظهر في اكتشف. الخاصة بالدعوة أو الاستهداف فقط."
+
+msgid "Public surveys live"
+msgstr "استبيانات عامة نشطة"
+
+msgid "Public · Discover"
+msgstr "عام · اكتشف"
+
+msgid "Publish"
+msgstr "نشر"
+
+msgid "q"
+msgstr "س"
+
+msgid "question"
+msgstr "سؤال"
+
+msgid "Question added."
+msgstr "تمت إضافة السؤال."
+
+msgid "Question deleted."
+msgstr "تم حذف السؤال."
+
+msgid "question text"
+msgstr "نص السؤال"
+
+msgid "Question updated."
+msgstr "تم تحديث السؤال."
+
+msgid "Questions"
+msgstr "الأسئلة"
+
+msgid "questions"
+msgstr "أسئلة"
+
+msgid "Ranking"
+msgstr "ترتيب"
+
+msgid "Rate"
+msgstr "قيّم"
+
+msgid "Rating (stars / numbers)"
+msgstr "تقييم (نجوم / أرقام)"
+
+msgid "Rating max"
+msgstr "الحد الأقصى للتقييم"
+
+msgid "Rating out of range."
+msgstr "التقييم خارج النطاق."
+
+msgid "Register"
+msgstr "إنشاء حساب"
+
+msgid "Rejected"
+msgstr "مرفوض"
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "required"
+msgstr "مطلوب"
+
+msgid "Researcher (legacy)"
+msgstr "باحث (قديم)"
+
+msgid "response target"
+msgstr "هدف الردود"
+
+msgid "Responses"
+msgstr "الردود"
+
+msgid "Role"
+msgstr "الدور"
+
+msgid "Role updated."
+msgstr "تم تحديث الدور."
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Save changes"
+msgstr "حفظ التغييرات"
+
+msgid "Scale (e.g. 1–10)"
+msgstr "مقياس (مثل 1–10)"
+
+msgid "Scale / number max"
+msgstr "الحد الأقصى للمقياس / الرقم"
+
+msgid "Scale / number min"
+msgstr "الحد الأدنى للمقياس / الرقم"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search public active surveys."
+msgstr "ابحث في الاستبيانات العامة النشطة."
+
+msgid "Search surveys"
+msgstr "البحث في الاستبيانات"
+
+msgid "Select at least one option."
+msgstr "اختر خياراً واحداً على الأقل."
+
+msgid "Show only if question"
+msgstr "أظهر فقط إذا كان السؤال"
+
+msgid "Single choice"
+msgstr "اختيار واحد"
+
+msgid "slug"
+msgstr "المعرّف"
+
+msgid "Sort"
+msgstr "الترتيب"
+
+msgid "Start a company"
+msgstr "ابدأ شركة"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Submit answers"
+msgstr "إرسال الإجابات"
+
+msgid "survey"
+msgstr "استبيان"
+
+msgid "Survey closed"
+msgstr "الاستبيان مغلق"
+
+msgid "Survey completion"
+msgstr "إكمال استبيان"
+
+msgid "Survey created"
+msgstr "إنشاء استبيان"
+
+msgid ""
+"Survey created as draft. Add questions, then publish to appear in Discover."
+msgstr "تم إنشاء الاستبيان كمسودة. أضف أسئلة ثم انشر ليظهر في اكتشف."
+
+msgid "Survey is active and public — it now appears on Discover for everyone."
+msgstr "الاستبيان نشط وعام — يظهر الآن في اكتشف للجميع."
+
+msgid "Survey is active but private — it will not appear on Discover."
+msgstr "الاستبيان نشط لكنه خاص — لن يظهر في اكتشف."
+
+msgid ""
+"Survey is active. Members-only: visible on Discover to company members."
+msgstr "الاستبيان نشط. للأعضاء فقط: يظهر في اكتشف لأعضاء الشركة."
+
+msgid "Survey must belong to a company."
+msgstr "يجب أن ينتمي الاستبيان إلى شركة."
+
+msgid "Survey updated."
+msgstr "تم تحديث الاستبيان."
+
+msgid "surveys"
+msgstr "استبيانات"
+
+msgid "Surveys created"
+msgstr "استبيانات أُنشئت"
+
+msgid "Surveys taken"
+msgstr "استبيانات أُجيب عليها"
+
+msgid "Surveys that reward participation"
+msgstr "استبيانات تكافئ المشاركة"
+
+msgid "Suspended"
+msgstr "موقوف"
+
+msgid "Take"
+msgstr "شارك"
+
+msgid "Take survey"
+msgstr "ابدأ الاستبيان"
+
+msgid "targeting"
+msgstr "الاستهداف"
+
+msgid "Team"
+msgstr "الفريق"
+
+msgid "Text (short / long)"
+msgstr "نص (قصير / طويل)"
+
+msgid "Thank you!"
+msgstr "شكراً لك!"
+
+msgid "Thank you! Your responses have been recorded."
+msgstr "شكراً لك! تم تسجيل إجاباتك."
+
+msgid "This private survey requires login."
+msgstr "هذا الاستبيان الخاص يتطلب تسجيل الدخول."
+
+msgid "This question is required."
+msgstr "هذا السؤال مطلوب."
+
+msgid "This survey is frozen and can no longer be edited."
+msgstr "هذا الاستبيان مجمّد ولا يمكن تعديله."
+
+msgid "This survey is frozen or no longer a draft and cannot be edited."
+msgstr "هذا الاستبيان مجمّد أو لم يعد مسودة ولا يمكن تعديله."
+
+msgid ""
+"This survey is live on Discover for other accounts (unless members-only "
+"targeting applies)."
+msgstr ""
+"هذا الاستبيان ظاهر في اكتشف للحسابات الأخرى (ما لم يكن موجهاً للأعضاء فقط)."
+
+msgid "This survey is restricted to company members."
+msgstr "هذا الاستبيان مخصص لأعضاء الشركة."
+
+msgid "This survey is targeted to a different audience."
+msgstr "هذا الاستبيان موجّه لجمهور مختلف."
+
+msgid "This user is already a member of the company."
+msgstr "هذا المستخدم عضو بالفعل في الشركة."
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "title"
+msgstr "العنوان"
+
+msgid "Title, description, category…"
+msgstr "العنوان، الوصف، الفئة…"
+
+msgid "Toggle theme"
+msgstr "تبديل المظهر"
+
+msgid "Total"
+msgstr "الإجمالي"
+
+msgid "Total XP"
+msgstr "إجمالي نقاط الخبرة"
+
+msgid "Trust score"
+msgstr "درجة الثقة"
+
+msgid "trust score"
+msgstr "درجة الثقة"
+
+msgid "Type & verification"
+msgstr "النوع والتحقق"
+
+msgid "Update password"
+msgstr "تحديث كلمة المرور"
+
+msgid ""
+"Update survey information. Questions are managed on the survey detail page."
+msgstr "حدّث معلومات الاستبيان. تُدار الأسئلة من صفحة تفاصيل الاستبيان."
+
+msgid "Used for single/multiple choice and ranking items."
+msgstr "يُستخدم لأسئلة الاختيار الواحد/المتعدد والترتيب."
+
+msgid "user"
+msgstr "مستخدم"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "users"
+msgstr "مستخدمون"
+
+msgid "UX / usability"
+msgstr "تجربة المستخدم"
+
+msgid "Value"
+msgstr "القيمة"
+
+msgid "Value out of range."
+msgstr "القيمة خارج النطاق."
+
+msgid "View all"
+msgstr "عرض الكل"
+
+msgid "Viewer"
+msgstr "مشاهد"
+
+msgid "Was answered"
+msgstr "تمت الإجابة"
+
+msgid "Was not answered"
+msgstr "لم تتم الإجابة"
+
+msgid "Welcome to SURVERA!"
+msgstr "مرحباً بك في SURVERA!"
+
+msgid ""
+"XP builds levels and badges. Points come only from completing paid surveys."
+msgstr ""
+"نقاط الخبرة تبني المستويات والشارات. النقاط تُمنح فقط عند إكمال الاستبيانات "
+"المدفوعة."
+
+msgid "Yes / No"
+msgstr "نعم / لا"
+
+msgid "You are not in any company yet."
+msgstr "لست عضواً في أي شركة بعد."
+
+msgid "You do not have permission to edit this survey."
+msgstr "ليس لديك صلاحية تعديل هذا الاستبيان."
+
+msgid "You do not meet the age range for this survey."
+msgstr "لا تستوفي نطاق العمر لهذا الاستبيان."
+
+msgid "You do not meet the minimum age for this survey."
+msgstr "لا تستوفي الحد الأدنى للعمر لهذا الاستبيان."
+
+msgid "You need level %(n)s or higher to take this survey."
+msgstr "تحتاج المستوى %(n)s أو أعلى للإجابة على هذا الاستبيان."
+
+msgid "Your trust score is too low for this survey."
+msgstr "درجة ثقتك منخفضة جداً لهذا الاستبيان."
+
+msgid "—"
+msgstr "—"
+
+msgid "≤ number"
+msgstr "≤ رقم"
+
+msgid "≥ number"
+msgstr "≥ رقم"
+
+msgid "%(counter)s public survey"
+msgid_plural "%(counter)s public surveys"
+msgstr[0] "%(counter)s استبيان عام"
+msgstr[1] "استبيان عام واحد"
+msgstr[2] "استبيانان عامان"
+msgstr[3] "%(counter)s استبيانات عامة"
+msgstr[4] "%(counter)s استبياناً عاماً"
+msgstr[5] "%(counter)s استبيان عام"
+
+msgid "Leaderboard"
+msgstr "لوحة المتصدرين"
+
+msgid "Reputation"
+msgstr "السمعة"
+
+msgid "Email digest"
+msgstr "ملخص البريد"
+
+msgid "Periodic summary of unread notifications. Team invites still send immediately."
+msgstr "ملخص دوري للإشعارات غير المقروءة. دعوات الفريق تُرسل فوراً."
+
+msgid "Response status"
+msgstr "حالة الردود"
+
+msgid "Completions — last %(n)s days"
+msgstr "الإكمالات — آخر %(n)s يوماً"
+
+msgid "Target progress"
+msgstr "تقدم الهدف"
+
+msgid "Per question"
+msgstr "لكل سؤال"
+
+msgid "No responses yet."
+msgstr "لا توجد ردود بعد."
+
+msgid "Unlocked"
+msgstr "مفتوح"
+
+msgid "Locked"
+msgstr "مقفل"
+
+msgid "Load more"
+msgstr "تحميل المزيد"
+
+msgid "Outside top 100"
+msgstr "خارج أفضل 100"
+
+msgid "SURVERA activity digest (%(n)d unread)"
+msgstr "ملخص نشاط SURVERA (%(n)d غير مقروء)"
+
+msgid "Daily"
+msgstr "يومي"
+
+msgid "Weekly"
+msgstr "أسبوعي"
+
+msgid "Off"
+msgstr "إيقاف"
+
+msgid "You"
+msgstr "أنت"

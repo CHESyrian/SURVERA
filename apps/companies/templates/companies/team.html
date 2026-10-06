@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}<div class="sv-page-head"><div><h1>{{ company.name }}</h1></div>
+<a href="{% url 'companies:list' %}" class="btn btn-ghost btn-sm">{% trans "All companies" %}</a></div>
+{% if can_manage and assignable_roles %}<div class="sv-card" style="margin-bottom:1rem;"><h2 style="font-size:1.1rem;">{% trans "Add member" %}</h2>
+<form method="post" action="{% url 'companies:member_add' company.pk %}" style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:end;">
+{% csrf_token %}<input class="form-control" type="email" name="email" required placeholder="email">
+<select class="form-control" name="role">{% for r in assignable_roles %}<option value="{{ r }}">{% if r == "moderator" %}{% trans "Moderator" %}{% elif r == "participant" %}{% trans "Participant" %}{% else %}{{ r }}{% endif %}</option>{% endfor %}</select>
+<button type="submit" class="btn btn-primary">{% trans "Add" %}</button></form></div>{% endif %}
+<div class="sv-card" style="padding:0;overflow:hidden;"><table class="sv-table"><thead><tr><th>{% trans "Member" %}</th><th>{% trans "Role" %}</th><th></th></tr></thead><tbody>
+{% for m in members %}<tr><td>{{ m.user.email }}</td><td><span class="sv-chip">{{ m.get_role_display }}</span></td><td style="text-align:end;">
+{% if can_manage and m.role != 'owner' %}<form method="post" action="{% url 'companies:member_remove' company.pk m.pk %}" style="display:inline;">{% csrf_token %}
+<button type="submit" class="btn btn-ghost btn-sm" style="color:var(--sv-danger);">{% trans "Remove" %}</button></form>{% endif %}
+</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

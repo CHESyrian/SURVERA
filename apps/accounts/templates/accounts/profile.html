@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Profile" %} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Profile" %}</h1>
+    <p class="sv-muted mb-0">{{ user.username|capfirst }} · {{ user.email }}</p>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    <a href="{% url 'surveys:list' %}" class="btn btn-ghost btn-sm">{% trans "My surveys" %}</a>
+    <a href="{% url 'companies:list' %}" class="btn btn-ghost btn-sm">{% trans "Companies" %}</a>
+    <a href="{% url 'surveys:discover' %}" class="btn btn-ghost btn-sm">{% trans "Discover" %}</a>
+  </div>
+</div>
+
+{% with initial_tab=active_tab|default:"dashboard" %}
+<div class="sv-profile-layout" x-data="{ tab: '{% if form.errors %}info{% elif prefs_form.errors %}notifications{% else %}{{ initial_tab }}{% endif %}' }">
+  <aside class="sv-profile-sidebar">
+    <ul class="sv-profile-nav">
+      <li>
+        <button type="button" class="sv-profile-nav-btn" :class="{ 'is-active': tab === 'dashboard' }" @click="tab = 'dashboard'">
+          {% trans "Profile Dashboard" %}
+        </button>
+      </li>
+      <li>
+        <button type="button" class="sv-profile-nav-btn" :class="{ 'is-active': tab === 'info' }" @click="tab = 'info'">
+          {% trans "Profile Informations" %}
+        </button>
+      </li>
+      <li>
+        <button type="button" class="sv-profile-nav-btn" :class="{ 'is-active': tab === 'notifications' }" @click="tab = 'notifications'">
+          {% trans "Notifications" %}
+        </button>
+      </li>
+      <li>
+        <button type="button" class="sv-profile-nav-btn" :class="{ 'is-active': tab === 'settings' }" @click="tab = 'settings'">
+          {% trans "Profile Settings" %}
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="sv-profile-main">
+    {# ===== Dashboard ===== #}
+    <div x-show="tab === 'dashboard'" x-cloak>
+      <div class="sv-dash-hero sv-card mb-3">
+        <div class="sv-dash-identity">
+          <div class="sv-rep-frame sv-rep-level-{{ user.trust_level|default:1 }}" title="{% blocktrans with n=user.trust_level_label %}Reputation: {{ n }}{% endblocktrans %}">
+            <div class="sv-rep-avatar" aria-hidden="true">{{ user.username|slice:":1"|upper }}</div>
+          </div>
+          <div class="sv-dash-id-text">
+            <div class="sv-dash-username">{{ user.username|capfirst }}</div>
+            <div class="sv-muted">{{ user.email }}</div>
+            <div class="d-flex flex-wrap gap-1 mt-2">
+              <span class="sv-chip">{{ user.trust_level_label }}</span>
+              {% if user.is_email_verified %}
+              <span class="sv-chip sv-chip-success">{% trans "Email verified" %}</span>
+              {% else %}
+              <a href="{% url 'accounts:verify_email' %}" class="sv-chip sv-chip-warn text-decoration-none">{% trans "Email not verified" %}</a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="sv-coin-card" title="{% trans 'Coins balance' %}">
+            <div class="sv-coin-icon" aria-hidden="true">🪙</div>
+            <div>
+              <div class="sv-coin-value">{{ points }}</div>
+              <div class="sv-coin-label">{% trans "Coins" %}</div>
+            </div>
+          </div>
+        </div>
+
+        {% if progress %}
+        <div class="sv-xp-block mt-3">
+          <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-2 mb-1">
+            <strong>{% blocktrans with level=progress.level %}Level {{ level }} · XP{% endblocktrans %}</strong>
+            <span class="sv-muted small">{{ progress.xp_total }} / {{ xp_next }} XP</span>
+          </div>
+          <div class="sv-xp-track" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="sv-xp-fill" style="width: {{ progress_pct }}%;"></div>
+          </div>
+        </div>
+
+        <div class="sv-profile-stat-grid mt-3">
+          <div class="sv-profile-stat">
+            <div class="value">{{ user.honor_points }}</div>
+            <div class="label">{% trans "Reputation" %}</div>
+          </div>
+          <div class="sv-profile-stat">
+            <div class="value">{{ progress.surveys_completed }}</div>
+            <div class="label">{% trans "Surveys taken" %}</div>
+          </div>
+          <div class="sv-profile-stat">
+            <div class="value">{{ progress.surveys_created }}</div>
+            <div class="label">{% trans "Surveys created" %}</div>
+          </div>
+          <div class="sv-profile-stat">
+            <div class="value">{{ badges_earned_count }}{% if badge_catalog %}<span class="sv-stat-of">/{{ badge_catalog|length }}</span>{% endif %}</div>
+            <div class="label">{% trans "Badges" %}</div>
+          </div>
+        </div>
+        {% else %}
+        <p class="sv-muted mb-0 mt-3">{% trans "Progress will appear after your first activity." %}</p>
+        {% endif %}
+      </div>
+
+      <div class="sv-card mb-3">
+        <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-2 mb-3">
+          <h2 class="h6 mb-0">{% trans "Badges" %}</h2>
+          {% if badge_catalog %}
+          <span class="sv-muted small">
+            {% blocktrans count n=badges_earned_count %}{{ n }} earned{% plural %}{{ n }} earned{% endblocktrans %}
+            · {{ badge_catalog|length }} {% trans "total" %}
+          </span>
+          {% endif %}
+        </div>
+        {% if badges %}
+        <div class="sv-badge-strip mb-3" aria-label="{% trans 'Earned badges' %}">
+          {% for item in badges %}
+          <span class="sv-badge-pill" title="{{ item.badge.name }}">
+            <span class="sv-badge-icon">{{ item.badge.icon|default:"🏅" }}</span>
+            <span>{{ item.badge.name }}</span>
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if badge_catalog %}
+        <div class="sv-badge-grid">
+          {% for item in badge_catalog %}
+          <div class="sv-badge-card{% if item.earned %} is-earned{% else %} is-locked{% endif %}"
+               title="{{ item.badge.description }}">
+            <span class="sv-badge-icon" aria-hidden="true">{{ item.badge.icon|default:"🏅" }}</span>
+            <span class="name">{{ item.badge.name }}</span>
+            {% if item.badge.description %}
+            <span class="desc">{{ item.badge.description|truncatechars:72 }}</span>
+            {% endif %}
+            {% if item.earned %}
+            <span class="sv-badge-status earned">{% trans "Unlocked" %}</span>
+            {% else %}
+            <span class="sv-badge-status locked">{% trans "Locked" %}</span>
+            <div class="sv-badge-progress" role="progressbar"
+                 aria-valuenow="{{ item.current }}" aria-valuemin="0" aria-valuemax="{{ item.target }}">
+              <div class="sv-badge-progress-bar" style="width: {{ item.percent }}%;"></div>
+            </div>
+            <span class="sv-badge-progress-label">{{ item.current }}/{{ item.target }}</span>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="sv-muted mb-0">
+          {% trans "No badges configured yet. Staff can run seed_badges, then complete surveys and level up to unlock them." %}
+        </p>
+        {% endif %}
+      </div>
+    </div>
+
+    {# ===== Profile Informations ===== #}
+    <div x-show="tab === 'info'" x-cloak>
+      <div class="sv-card mb-3">
+        <div x-data="{ editing: {% if form.errors %}true{% else %}false{% endif %} }">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h2 class="h6 mb-0">{% trans "Profile Informations" %}</h2>
+          <button type="button" class="btn btn-primary btn-sm" x-show="!editing" @click="editing = true">
+            {% trans "Edit information" %}
+          </button>
+        </div>
+
+          <div x-show="!editing">
+            <div class="sv-info-row">
+              <span class="k">{% trans "Username" %}</span>
+              <span class="v">{{ user.username }}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Email" %}</span>
+              <span class="v">{{ user.email }}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Name" %}</span>
+              <span class="v">{% if user.first_name or user.last_name %}{{ user.first_name }} {{ user.last_name }}{% else %}—{% endif %}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Language" %}</span>
+              <span class="v">{{ user.get_language_display }}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Date of birth" %}</span>
+              <span class="v">{% if user.date_of_birth %}{{ user.date_of_birth }}{% else %}—{% endif %}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Gender" %}</span>
+              <span class="v">{% if user.gender %}{{ user.get_gender_display }}{% else %}—{% endif %}</span>
+            </div>
+            <div class="sv-info-row">
+              <span class="k">{% trans "Reputation" %}</span>
+              <span class="v">{{ user.honor_points }} · {{ user.trust_level_label }} (L{{ user.trust_level }})</span>
+            </div>
+            <div class="mt-3">
+              <button type="button" class="btn btn-primary btn-sm" @click="editing = true">{% trans "Edit information" %}</button>
+            </div>
+          </div>
+
+          <div x-show="editing" x-cloak>
+            {% if not profile_complete %}
+            <div class="sv-callout sv-callout-info mb-3">
+              {% trans "Add date of birth and gender to complete your profile (XP bonus) and unlock targeted surveys." %}
+            </div>
+            {% endif %}
+            <form method="post" novalidate>
+              {% csrf_token %}
+              <input type="hidden" name="form_id" value="profile">
+              {% if form.non_field_errors %}
+              <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+              {% endif %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                  {{ form.first_name }}
+                  {% if form.first_name.errors %}<div class="text-danger small">{{ form.first_name.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                  {{ form.last_name }}
+                  {% if form.last_name.errors %}<div class="text-danger small">{{ form.last_name.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ form.language.id_for_label }}">{{ form.language.label }}</label>
+                  {{ form.language }}
+                  {% if form.language.errors %}<div class="text-danger small">{{ form.language.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
+                  {{ form.date_of_birth }}
+                  {% if form.date_of_birth.errors %}<div class="text-danger small">{{ form.date_of_birth.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+                  {{ form.gender }}
+                  {% if form.gender.errors %}<div class="text-danger small">{{ form.gender.errors }}</div>{% endif %}
+                </div>
+              </div>
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <button type="submit" class="btn btn-primary">{% trans "Save changes" %}</button>
+                <button type="button" class="btn btn-ghost" @click="editing = false">{% trans "Cancel" %}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% if memberships %}
+      <div class="sv-card mb-3">
+        <h2 class="h6 mb-3">{% trans "Companies" %}</h2>
+        <ul class="list-unstyled mb-0">
+          {% for m in memberships %}
+          <li class="d-flex justify-content-between align-items-center py-2 {% if not forloop.last %}border-bottom{% endif %}">
+            <a href="{% url 'companies:team' m.company.pk %}">{{ m.company.name }}</a>
+            <span class="sv-chip">{{ m.get_role_display }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+    {# ===== Notifications ===== #}
+    <div x-show="tab === 'notifications'" x-cloak>
+      <div class="sv-card">
+        <h2 class="h6 mb-2">{% trans "Notification preferences" %}</h2>
+        <p class="sv-muted small mb-3">
+          {% trans "Choose which notifications you receive in the app and by email." %}
+        </p>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="form_id" value="notifications">
+          <div class="table-responsive">
+            <table class="table sv-table mb-0 align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">{% trans "Type" %}</th>
+                  <th scope="col" class="text-center">{% trans "In-app" %}</th>
+                  <th scope="col" class="text-center">{% trans "Email" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{% trans "Survey published" %}<div class="sv-muted small">{% trans "Private / members-only surveys you can take" %}</div></td>
+                  <td class="text-center">{{ prefs_form.inapp_survey_published }}</td>
+                  <td class="text-center">{{ prefs_form.email_survey_published }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Coins awarded" %}</td>
+                  <td class="text-center">{{ prefs_form.inapp_points_awarded }}</td>
+                  <td class="text-center">{{ prefs_form.email_points_awarded }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Team invite" %}</td>
+                  <td class="text-center">{{ prefs_form.inapp_team_invite }}</td>
+                  <td class="text-center">{{ prefs_form.email_team_invite }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "System" %}</td>
+                  <td class="text-center">{{ prefs_form.inapp_system }}</td>
+                  <td class="text-center">{{ prefs_form.email_system }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-3">
+            <label class="form-label" for="{{ prefs_form.email_digest.id_for_label }}">{% trans "Email digest" %}</label>
+            {{ prefs_form.email_digest }}
+            <div class="form-text">{% trans "Periodic summary of unread notifications. Team invites still send immediately." %}</div>
+          </div>
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary">{% trans "Save notification preferences" %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {# ===== Profile Settings ===== #}
+    <div x-show="tab === 'settings'" x-cloak>
+      <div class="sv-card mb-3">
+        <h2 class="h6 mb-2">{% trans "Password" %}</h2>
+        <p class="sv-muted small mb-3">{% trans "Update your password regularly to keep your account secure." %}</p>
+        <a href="{% url 'accounts:password_change' %}" class="btn btn-primary" hx-boost="false">{% trans "Change password" %}</a>
+      </div>
+
+      <div class="sv-card mb-3">
+        <h2 class="h6 mb-2">{% trans "Email verification" %}</h2>
+        {% if user.is_email_verified %}
+        <p class="sv-muted mb-0">{% trans "Your email is verified." %}</p>
+        <span class="sv-chip sv-chip-success mt-2 d-inline-flex">{% trans "Verified" %}</span>
+        {% else %}
+        <p class="sv-muted small mb-3">{% trans "Verify your email to create surveys, earn coins, and unlock full access." %}</p>
+        <a href="{% url 'accounts:verify_email' %}" class="btn btn-primary" hx-boost="false">{% trans "Verify email" %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endwith %}
+<style>[x-cloak]{display:none!important}</style>
+{% endblock %}

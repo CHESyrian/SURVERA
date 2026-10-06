@@ -1,0 +1,35 @@
+[project]
+name = "survera"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "CHESyrian", email = "tarek940gh@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "celery[redis]>=5.4",
+    "crispy-bootstrap5>=2024.10",
+    "django>=6.1,<6.2",
+    "django-crispy-forms>=2.3",
+    "django-debug-toolbar>=4.4",
+    "django-environ>=0.11",
+    "django-htmx>=1.17",
+    "django-modeltranslation>=0.19",
+    "factory-boy>=3.3",
+    "gunicorn>=22.0",
+    "pillow>=10.4",
+    "psycopg[binary]>=3.2",
+    "pytest>=8.3",
+    "pytest-django>=4.9",
+    "redis>=5.0",
+    "ruff>=0.6",
+    "whitenoise>=6.7",
+]
+
+[project.scripts]
+survera = "survera:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Notifications" %} · SURVERA{% endblock %}
+
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1 class="h4 mb-1">{% trans "Notifications" %}</h1>
+    <p class="sv-muted mb-0">
+      {% if unread %}
+        {% blocktrans count counter=unread %}{{ counter }} unread{% plural %}{{ counter }} unread{% endblocktrans %}
+      {% else %}
+        {% trans "You're all caught up." %}
+      {% endif %}
+    </p>
+  </div>
+  <div class="d-flex gap-2 flex-wrap">
+    {% if user.is_staff or user.is_superuser %}
+    <form method="post" action="{% url 'notifications:send_test' %}" hx-boost="false">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Send test" %}</button>
+    </form>
+    {% endif %}
+    {% if unread %}
+    <form method="post" action="{% url 'notifications:mark_all_read' %}" hx-boost="false">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-ghost btn-sm">{% trans "Mark all read" %}</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if notifications %}
+<ul class="sv-notif-list list-unstyled mb-0">
+  {% for n in notifications %}
+  <li>{% include "notifications/partials/item.html" with n=n %}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="sv-card">
+  <p class="sv-muted mb-0">{% trans "No notifications yet. When a company publishes a survey you can take, it will show up here." %}</p>
+</div>
+{% endif %}
+{% endblock %}

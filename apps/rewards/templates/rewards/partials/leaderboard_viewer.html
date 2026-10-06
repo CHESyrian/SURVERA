@@ -1,0 +1,28 @@
+{% load i18n %}
+<tr class="sv-lb-row is-self sv-lb-viewer-row{% if row.medal %} sv-lb-medal-{{ row.medal }}{% endif %}">
+  <td class="sv-lb-col-rank">
+    {% if row.medal %}
+    <span class="sv-lb-medal sv-lb-medal-{{ row.medal }}">
+      {% if row.medal == 'gold' %}🥇
+      {% elif row.medal == 'silver' %}🥈
+      {% else %}🥉{% endif %}
+      <span class="sv-lb-rank-num">{{ row.rank }}</span>
+    </span>
+    {% else %}
+    <span class="sv-lb-rank">{{ row.rank }}</span>
+    {% endif %}
+  </td>
+  <td>
+    <div class="sv-lb-name">
+      <span class="sv-lb-label">{{ row.label }}</span>
+      {% if row.subtitle %}<span class="sv-lb-sub">{{ row.subtitle }}</span>{% endif %}
+      <span class="sv-lb-you">{% trans "You" %}</span>
+      {% if row.rank > 100 %}
+      <span class="sv-lb-out">{% trans "Outside top 100" %}</span>
+      {% endif %}
+    </div>
+  </td>
+  <td class="sv-lb-col-score">
+    <span class="sv-lb-score">{{ row.score }}</span>
+  </td>
+</tr>

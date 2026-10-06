@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}<div class="sv-card"><h1>{% trans "Survey closed" %}</h1>
+<a href="{% url 'surveys:discover' %}" class="btn btn-primary">{% trans "Discover" %}</a></div>{% endblock %}

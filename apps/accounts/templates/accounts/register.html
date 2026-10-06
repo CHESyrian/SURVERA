@@ -1,0 +1,78 @@
+{% extends "base.html" %}{% load i18n static %}
+{% block title %}{% trans "Register" %} – SURVERA{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <img src="{% static 'images/survera-logo.png' %}" alt="SURVERA" class="auth-logo-img">
+    </div>
+    <h1>{% trans "Create account" %}</h1>
+    <form method="post" novalidate id="register-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <div class="mb-3">
+        <label class="form-label" for="id_email">{{ form.email.label }}</label>
+        {{ form.email }}
+        {% for e in form.email.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="id_username">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% for e in form.username.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="id_password1">{{ form.password1.label }}</label>
+        <div class="sv-pw-field">
+          {{ form.password1 }}
+          <button type="button" class="sv-pw-toggle" data-pw-toggle="id_password1"
+                  aria-label="{% trans 'Show password' %}" title="{% trans 'Show password' %}">
+            <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </button>
+        </div>
+        {% if form.password1.help_text %}<div class="form-text">{{ form.password1.help_text }}</div>{% endif %}
+        <div class="sv-pw-meter" data-pw-meter-for="id_password1" hidden>
+          <div class="sv-pw-meter-bar"><span class="sv-pw-meter-fill"></span></div>
+          <span class="sv-pw-meter-label"></span>
+        </div>
+        {% for e in form.password1.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="id_password2">{{ form.password2.label }}</label>
+        <div class="sv-pw-field">
+          {{ form.password2 }}
+          <button type="button" class="sv-pw-toggle" data-pw-toggle="id_password2"
+                  aria-label="{% trans 'Show password' %}" title="{% trans 'Show password' %}">
+            <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </button>
+        </div>
+        {% for e in form.password2.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+      </div>
+      {% if form.captcha %}
+      <div class="mb-3">
+        {{ form.captcha }}
+        {% for e in form.captcha.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+      </div>
+      {% endif %}
+      <button type="submit" class="btn btn-register btn-lg w-100">{% trans "Create account" %}</button>
+    </form>
+    <p class="auth-footer"><a href="{% url 'accounts:login' %}">{% trans "Already have an account?" %}</a></p>
+  </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/password.js' %}"></script>
+{% endblock %}

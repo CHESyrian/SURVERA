@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %} · SURVERA{% endblock %}
+
+{% block content %}
+
+{# ---------- Hero ---------- #}
+<section class="sv-section sv-section-hero">
+  <div class="sv-hero">
+    <h1>{% trans "Surveys that reward participation" %}</h1>
+    <p>
+      {% trans "Companies run research. People share opinions and earn XP — and points on paid surveys." %}
+    </p>
+    <p class="sv-hero-note">
+      {% trans "XP builds levels and badges. Points come only from completing paid surveys." %}
+    </p>
+    <div class="sv-hero-actions">
+      <a href="{% url 'surveys:discover' %}" class="btn btn-primary">{% trans "Discover surveys" %}</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'surveys:list' %}" class="btn btn-hero-secondary">{% trans "My surveys" %}</a>
+        {% if can_create_survey %}
+          <a href="{% url 'surveys:create' %}" class="btn btn-hero-secondary">{% trans "Create survey" %}</a>
+        {% endif %}
+      {% else %}
+        <a href="{% url 'accounts:register' %}" class="btn btn-hero-secondary">{% trans "Create account" %}</a>
+        <a href="{% url 'accounts:login' %}" class="btn btn-hero-secondary">{% trans "Log in" %}</a>
+      {% endif %}
+    </div>
+    {% if user.is_authenticated and progress %}
+    <div class="sv-hero-progress">
+      <span>{% blocktrans with level=progress.level xp=progress.xp_total pts=points %}Level {{ level }} · {{ xp }} XP · {{ pts }} points{% endblocktrans %}</span>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{# ---------- Stats ---------- #}
+<section class="sv-section sv-section-stats">
+  <div class="sv-stats">
+    <div class="sv-stat">
+      <div class="value">{{ active_count }}</div>
+      <div class="label">{% trans "Public surveys live" %}</div>
+    </div>
+    <div class="sv-stat">
+      <div class="value">XP</div>
+      <div class="label">{% trans "Levels & badges" %}</div>
+    </div>
+    <div class="sv-stat">
+      <div class="value">{% trans "Pts" %}</div>
+      <div class="label">{% trans "Paid survey rewards" %}</div>
+    </div>
+    <div class="sv-stat">
+      <div class="value">CSV</div>
+      <div class="label">{% trans "Export results" %}</div>
+    </div>
+  </div>
+</section>
+
+{# ---------- Features ---------- #}
+<section class="sv-section sv-section-features">
+  <div class="sv-section-head">
+    <h2 class="sv-section-title">{% trans "What you can do" %}</h2>
+    <p class="sv-section-sub">{% trans "Three ways SURVERA helps companies and participants." %}</p>
+  </div>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="sv-card h-100 sv-feature-card sv-feature-discover">
+        <div class="sv-feature-icon" aria-hidden="true">🔍</div>
+        <h3 class="h6 mb-2">{% trans "Discover & take" %}</h3>
+        <p class="sv-muted mb-0">{% trans "Browse public surveys, filter by category or pricing, and share your answers." %}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="sv-card h-100 sv-feature-card sv-feature-create">
+        <div class="sv-feature-icon" aria-hidden="true">✏️</div>
+        <h3 class="h6 mb-2">{% trans "Create & publish" %}</h3>
+        <p class="sv-muted mb-0">{% trans "Companies create free or paid surveys. People discover and take surveys to earn XP and points." %}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="sv-card h-100 sv-feature-card sv-feature-earn">
+        <div class="sv-feature-icon" aria-hidden="true">🏆</div>
+        <h3 class="h6 mb-2">{% trans "Earn & export" %}</h3>
+        <p class="sv-muted mb-0">{% trans "Gain XP on every activity. Paid completions grant coins. Owners track analytics and CSV export." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ---------- Featured surveys ---------- #}
+{% if featured %}
+<section class="sv-section sv-section-featured">
+  <div class="sv-section-head sv-section-head-row">
+    <div>
+      <h2 class="sv-section-title">{% trans "Featured surveys" %}</h2>
+      <p class="sv-section-sub">{% trans "Latest public active surveys you can take" %}</p>
+    </div>
+    <a href="{% url 'surveys:discover' %}" class="btn btn-ghost btn-sm">{% trans "View all" %}</a>
+  </div>
+  <div class="row g-3">
+    {% for s in featured %}
+    <div class="col-md-4">
+      <div class="card sv-survey-card h-100{% if s.pk in completed_survey_ids %} sv-survey-done{% endif %}">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex flex-wrap gap-1 mb-2">
+            {% if s.is_paid %}
+            <span class="sv-chip sv-chip-paid">{% trans "Paid" %}</span>
+            {% else %}
+            <span class="sv-chip sv-chip-free">{% trans "Free" %}</span>
+            {% endif %}
+            {% if s.category %}<span class="sv-chip">{{ s.category }}</span>{% endif %}
+            {% if s.pk in completed_survey_ids %}
+            <span class="sv-chip sv-chip-done">{% trans "Completed" %}</span>
+            {% endif %}
+          </div>
+          <h3 class="h6 mb-1">{{ s.title }}</h3>
+          {% if s.description %}
+          <p class="sv-muted small mb-2" style="flex:1;">{{ s.description|truncatechars:90 }}</p>
+          {% else %}
+          <div style="flex:1;"></div>
+          {% endif %}
+          <div class="d-flex align-items-center justify-content-between gap-2 mt-2">
+            <span class="sv-muted small">
+              {{ s.owner_label }}
+              · {{ s.question_count }} {% trans "q" %}
+            </span>
+            {% if s.pk in completed_survey_ids %}
+            <span class="btn btn-sm btn-done disabled" aria-disabled="true">{% trans "Done" %}</span>
+            {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'responses:take' s.pk %}">{% trans "Take" %}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{# ---------- How it works ---------- #}
+<section class="sv-section sv-section-how">
+  <div class="sv-card sv-how-card">
+    <div class="sv-section-head">
+      <h2 class="sv-section-title">{% trans "How it works" %}</h2>
+      <p class="sv-section-sub">{% trans "From create to export in three steps." %}</p>
+    </div>
+    <ol class="sv-steps">
+      <li>{% trans "Companies create free or paid surveys. People take surveys and earn XP (and points on paid ones)." %}</li>
+      <li>{% trans "Participants complete surveys and earn XP (and points on paid ones)." %}</li>
+      <li>{% trans "Owners publish, track analytics, and export results as CSV." %}</li>
+    </ol>
+    {% if not user.is_authenticated %}
+    <div class="mt-3">
+      <a href="{% url 'companies:create' %}" class="btn btn-ghost btn-sm">{% trans "Start a company" %}</a>
+    </div>
+    {% elif not has_company_editor %}
+    <div class="mt-3">
+      <a href="{% url 'companies:create' %}" class="btn btn-ghost btn-sm">{% trans "Create a company" %}</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

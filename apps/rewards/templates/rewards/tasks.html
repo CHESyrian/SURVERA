@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tasks" %} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Tasks" %}</h1>
+    <p class="sv-muted mb-0">{% trans "Daily and weekly goals. Completing them grants Reputation and XP automatically." %}</p>
+  </div>
+</div>
+
+<section class="sv-card" style="margin-bottom:1.25rem;">
+  <h2 style="font-size:1.15rem;margin-top:0;">{% trans "Today" %}</h2>
+  {% if daily_tasks %}
+  <div style="display:flex;flex-direction:column;gap:0.75rem;">
+    {% for t in daily_tasks %}
+    <div style="border:1px solid var(--sv-border,#e5e7eb);border-radius:8px;padding:0.85rem 1rem;">
+      <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;">
+        <div>
+          <strong>{{ t.definition.title }}</strong>
+          {% if t.definition.description %}<p class="sv-muted small mb-0">{{ t.definition.description }}</p>{% endif %}
+        </div>
+        {% if t.is_complete %}
+        <span class="sv-chip sv-chip-active">{% trans "Completed" %}</span>
+        {% else %}
+        <span class="sv-muted">{{ t.current_count }}/{{ t.target_count }}</span>
+        {% endif %}
+      </div>
+      <div style="margin-top:0.5rem;height:8px;background:var(--sv-border,#e5e7eb);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:{{ t.percent }}%;background:var(--sv-primary,#2563eb);"></div>
+      </div>
+      <p class="sv-muted small mb-0 mt-2">
+        +{{ t.honor_reward }} {% trans "Reputation" %} · +{{ t.xp_reward }} XP
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="sv-muted">{% trans "No daily tasks." %}</p>
+  {% endif %}
+</section>
+
+<section class="sv-card" style="margin-bottom:1.25rem;">
+  <h2 style="font-size:1.15rem;margin-top:0;">{% trans "This week" %}</h2>
+  {% if weekly_tasks %}
+  <div style="display:flex;flex-direction:column;gap:0.75rem;">
+    {% for t in weekly_tasks %}
+    <div style="border:1px solid var(--sv-border,#e5e7eb);border-radius:8px;padding:0.85rem 1rem;">
+      <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;">
+        <div>
+          <strong>{{ t.definition.title }}</strong>
+          {% if t.definition.description %}<p class="sv-muted small mb-0">{{ t.definition.description }}</p>{% endif %}
+        </div>
+        {% if t.is_complete %}
+        <span class="sv-chip sv-chip-active">{% trans "Completed" %}</span>
+        {% else %}
+        <span class="sv-muted">{{ t.current_count }}/{{ t.target_count }}</span>
+        {% endif %}
+      </div>
+      <div style="margin-top:0.5rem;height:8px;background:var(--sv-border,#e5e7eb);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:{{ t.percent }}%;background:var(--sv-primary,#2563eb);"></div>
+      </div>
+      <p class="sv-muted small mb-0 mt-2">
+        +{{ t.honor_reward }} {% trans "Reputation" %} · +{{ t.xp_reward }} XP
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="sv-muted">{% trans "No weekly tasks." %}</p>
+  {% endif %}
+</section>
+
+<section class="sv-card">
+  <h2 style="font-size:1.15rem;margin-top:0;">{% trans "Achievements" %}</h2>
+  <p class="sv-muted mb-0">{% trans "General achievements (medals) are coming soon." %}</p>
+</section>
+{% endblock %}

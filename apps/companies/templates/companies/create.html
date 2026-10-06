@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}<div class="sv-card" style="max-width:520px;margin:0 auto;"><h1>{% trans "Create a company" %}</h1>
+<form method="post">{% csrf_token %}<p><label>{% trans "Company name" %}</label>
+<input class="form-control" type="text" name="name" required maxlength="200"></p>
+<button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+<a href="{% url 'companies:list' %}" class="btn btn-ghost">{% trans "Cancel" %}</a></form></div>{% endblock %}

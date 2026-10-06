@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Leaderboard" %} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Leaderboard" %}</h1>
+    <p class="sv-muted mb-0">
+      {% trans "Top 100 by Reputation, XP, and company engagement. Medals mark the top three." %}
+    </p>
+  </div>
+</div>
+
+<div class="sv-lb-tabs" role="tablist" aria-label="{% trans 'Leaderboard categories' %}">
+  {% for t in tabs %}
+  <a role="tab"
+     class="sv-lb-tab{% if t.id == tab %} is-active{% endif %}"
+     href="{% url 'rewards:leaderboard' %}?tab={{ t.id }}"
+     hx-boost="false"
+     {% if t.id == tab %}aria-selected="true"{% else %}aria-selected="false"{% endif %}>
+    {{ t.label }}
+  </a>
+  {% endfor %}
+</div>
+
+<section class="sv-card sv-lb-card">
+  <div class="sv-lb-table-wrap">
+    <table class="sv-lb-table">
+      <thead>
+        <tr>
+          <th scope="col" class="sv-lb-col-rank">{% trans "Rank" %}</th>
+          <th scope="col">{% if tab == 'companies' %}{% trans "Company" %}{% else %}{% trans "Person" %}{% endif %}</th>
+          <th scope="col" class="sv-lb-col-score">{{ score_label }}</th>
+        </tr>
+      </thead>
+      <tbody id="sv-lb-body">
+        {% include "rewards/partials/leaderboard_rows.html" with page=page tab=tab include_viewer=False %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if not page.rows %}
+  <p class="sv-muted sv-lb-empty">{% trans "No rankings yet. Complete surveys and tasks to appear here." %}</p>
+  {% endif %}
+
+  {% if page.viewer_row %}
+  <div class="sv-lb-viewer-panel" aria-label="{% trans 'Your rank' %}">
+    <table class="sv-lb-table">
+      <tbody>
+        {% include "rewards/partials/leaderboard_viewer.html" with row=page.viewer_row %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

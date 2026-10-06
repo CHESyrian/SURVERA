@@ -1,0 +1,4 @@
+{% load i18n %}
+{% if unread %}
+<span class="sv-notif-badge" aria-label="{% blocktrans count counter=unread %}{{ counter }} unread notifications{% plural %}{{ counter }} unread notifications{% endblocktrans %}">{{ unread }}</span>
+{% endif %}

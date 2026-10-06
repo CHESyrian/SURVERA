@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}<div class="sv-card" style="max-width:480px;margin:0 auto;text-align:center;">
+<h1>{% trans "Thank you!" %}</h1><p class="sv-muted">{{ survey.title }}</p>
+<a href="{% url 'home' %}" class="btn btn-primary">{% trans "Home" %}</a></div>{% endblock %}

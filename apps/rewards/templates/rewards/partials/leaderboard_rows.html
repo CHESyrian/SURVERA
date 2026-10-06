@@ -1,0 +1,41 @@
+{% load i18n %}
+{% for row in page.rows %}
+<tr class="sv-lb-row{% if row.medal %} sv-lb-medal-{{ row.medal }}{% endif %}{% if row.is_self %} is-self{% endif %}">
+  <td class="sv-lb-col-rank">
+    {% if row.medal %}
+    <span class="sv-lb-medal sv-lb-medal-{{ row.medal }}" title="#{{ row.rank }}">
+      {% if row.medal == 'gold' %}🥇
+      {% elif row.medal == 'silver' %}🥈
+      {% else %}🥉{% endif %}
+      <span class="sv-lb-rank-num">{{ row.rank }}</span>
+    </span>
+    {% else %}
+    <span class="sv-lb-rank">{{ row.rank }}</span>
+    {% endif %}
+  </td>
+  <td>
+    <div class="sv-lb-name">
+      <span class="sv-lb-label">{{ row.label }}</span>
+      {% if row.subtitle %}<span class="sv-lb-sub">{{ row.subtitle }}</span>{% endif %}
+      {% if row.is_self %}<span class="sv-lb-you">{% trans "You" %}</span>{% endif %}
+    </div>
+  </td>
+  <td class="sv-lb-col-score">
+    <span class="sv-lb-score">{{ row.score }}</span>
+  </td>
+</tr>
+{% endfor %}
+
+{% if page.next_offset is not None %}
+<tr class="sv-lb-load-row" id="sv-lb-more">
+  <td colspan="3">
+    <button type="button"
+            class="sv-lb-load-more"
+            hx-get="{% url 'rewards:leaderboard_rows' %}?tab={{ tab }}&offset={{ page.next_offset }}"
+            hx-target="#sv-lb-more"
+            hx-swap="outerHTML">
+      {% trans "Load more" %}
+    </button>
+  </td>
+</tr>
+{% endif %}

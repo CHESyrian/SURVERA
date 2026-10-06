@@ -1,0 +1,1115 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SURVERA 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-28 12:11+0000\n"
+"PO-Revision-Date: 2026-08-28 12:11+0000\n"
+"Last-Translator: SURVERA Team\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "0–100. 0 means no trust filter."
+msgstr "0–100. 0 means no trust filter."
+
+msgid "0–100. Used for survey targeting."
+msgstr "0–100. Used for survey targeting."
+
+msgid "Account details"
+msgstr "Account details"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "Add"
+msgstr "Add"
+
+msgid ""
+"Add date of birth and gender to complete your profile (XP bonus) and unlock "
+"targeted surveys."
+msgstr ""
+"Add date of birth and gender to complete your profile (XP bonus) and unlock "
+"targeted surveys."
+
+msgid "Add member"
+msgstr "Add member"
+
+msgid "Add question"
+msgstr "Add question"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Admin (legacy)"
+msgstr "Admin (legacy)"
+
+msgid "Age: %(a)s–%(b)s"
+msgstr "Age: %(a)s–%(b)s"
+
+msgid "All"
+msgstr "All"
+
+msgid "All companies"
+msgstr "All companies"
+
+msgid "Already completed"
+msgstr "Already completed"
+
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+msgid "An account with this email already exists."
+msgstr "An account with this email already exists."
+
+msgid "Analyst"
+msgstr "Analyst"
+
+msgid "Analytics"
+msgstr "Analytics"
+
+msgid "Answer Yes or No."
+msgstr "Answer Yes or No."
+
+msgid "Audience targeting"
+msgstr "Audience targeting"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Back to profile"
+msgstr "Back to profile"
+
+msgid "Badge bonus"
+msgstr "Badge bonus"
+
+msgid "Badges"
+msgstr "Badges"
+
+msgid ""
+"Browse public surveys, filter by category or pricing, and share your "
+"answers."
+msgstr ""
+"Browse public surveys, filter by category or pricing, and share your "
+"answers."
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Cannot assign owner this way."
+msgstr "Cannot assign owner this way."
+
+msgid "Cannot assign owner via invite."
+msgstr "Cannot assign owner via invite."
+
+msgid "Cannot change the owner role here."
+msgstr "Cannot change the owner role here."
+
+msgid "Cannot publish a deleted survey."
+msgstr "Cannot publish a deleted survey."
+
+msgid "Cannot publish a survey with no questions."
+msgstr "Cannot publish a survey with no questions."
+
+msgid "Cannot remove the owner."
+msgstr "Cannot remove the owner."
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Change password"
+msgstr "Change password"
+
+msgid "Choices (one per line)"
+msgstr "Choices (one per line)"
+
+msgid "Choices / items (one per line)"
+msgstr "Choices / items (one per line)"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Closed"
+msgstr "Closed"
+
+msgid "Companies"
+msgstr "Companies"
+
+msgid ""
+"Companies create free or paid surveys. People discover and take surveys to "
+"earn XP and points."
+msgstr ""
+"Companies create free or paid surveys. People discover and take surveys to "
+"earn XP and points."
+
+msgid ""
+"Companies create free or paid surveys. People take surveys and earn XP (and "
+"points on paid ones)."
+msgstr ""
+"Companies create free or paid surveys. People take surveys and earn XP (and "
+"points on paid ones)."
+
+msgid ""
+"Companies run research. People share opinions and earn XP — and points on "
+"paid surveys."
+msgstr ""
+"Companies run research. People share opinions and earn XP — and points on "
+"paid surveys."
+
+msgid "Company"
+msgstr "Company"
+
+msgid "Company Member"
+msgstr "Company Member"
+
+msgid "Company member"
+msgstr "Company member"
+
+msgid "Company members only"
+msgstr "Company members only"
+
+msgid "Company name"
+msgstr "Company name"
+
+msgid "Company name is required."
+msgstr "Company name is required."
+
+msgid "Company “%(name)s” created. You are the owner."
+msgstr "Company “%(name)s” created. You are the owner."
+
+msgid "Company: SURVERA"
+msgstr "Company: SURVERA"
+
+msgid "Completed"
+msgstr "Completed"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "Conditional display (optional)"
+msgstr "Conditional display (optional)"
+
+msgid "Confirm password"
+msgstr "Confirm password"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create & publish"
+msgstr "Create & publish"
+
+msgid "Create a company"
+msgstr "Create a company"
+
+msgid "Create a company first, then you can create surveys."
+msgstr "Create a company first, then you can create surveys."
+
+msgid "Create account"
+msgstr "Create account"
+
+msgid "Create company"
+msgstr "Create company"
+
+msgid "Create survey"
+msgstr "Create survey"
+
+msgid "Current password"
+msgstr "Current password"
+
+msgid "Customer feedback"
+msgstr "Customer feedback"
+
+msgid "Daily login"
+msgstr "Daily login"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date of birth"
+msgstr "Date of birth"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Discover"
+msgstr "Discover"
+
+msgid "Discover & take"
+msgstr "Discover & take"
+
+msgid "Discover surveys"
+msgstr "Discover surveys"
+
+msgid "Does not equal"
+msgstr "Does not equal"
+
+msgid "Don't have an account?"
+msgstr "Don't have an account?"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Draft"
+msgstr "Draft"
+
+msgid ""
+"Draft surveys stay on My surveys only. Add questions, then Publish to list "
+"them on Discover (if public)."
+msgstr ""
+"Draft surveys stay on My surveys only. Add questions, then Publish to list "
+"them on Discover (if public)."
+
+msgid "Earn & export"
+msgstr "Earn & export"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Edit profile settings"
+msgstr "Edit profile settings"
+
+msgid "Edit question"
+msgstr "Edit question"
+
+msgid "Edit survey"
+msgstr "Edit survey"
+
+msgid "Education"
+msgstr "Education"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email is required."
+msgstr "Email is required."
+
+msgid "Enter a valid number."
+msgstr "Enter a valid number."
+
+msgid ""
+"Enter survey information only. You can add questions after saving, then "
+"publish when ready."
+msgstr ""
+"Enter survey information only. You can add questions after saving, then "
+"publish when ready."
+
+msgid "Equals"
+msgstr "Equals"
+
+msgid "Events"
+msgstr "Events"
+
+msgid "Export CSV"
+msgstr "Export CSV"
+
+msgid "Export results"
+msgstr "Export results"
+
+msgid "Featured surveys"
+msgstr "Featured surveys"
+
+msgid "Female"
+msgstr "Female"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Free"
+msgstr "Free"
+
+msgid "Frozen"
+msgstr "Frozen"
+
+msgid ""
+"Gain XP on every activity. Paid completions grant points. Owners track "
+"analytics and CSV export."
+msgstr ""
+"Gain XP on every activity. Paid completions grant points. Owners track "
+"analytics and CSV export."
+
+msgid "Gender"
+msgstr "Gender"
+
+msgid "Gender: %(g)s"
+msgstr "Gender: %(g)s"
+
+msgid "HR / workplace"
+msgstr "HR / workplace"
+
+msgid "Health"
+msgstr "Health"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "How it works"
+msgstr "How it works"
+
+msgid ""
+"If unchecked, this is a free survey (XP only; public; no points or response "
+"target)."
+msgstr ""
+"If unchecked, this is a free survey (XP only; public; no points or response "
+"target)."
+
+msgid "Important dates"
+msgstr "Important dates"
+
+msgid "In progress"
+msgstr "In progress"
+
+msgid "Invalid choice."
+msgstr "Invalid choice."
+
+msgid "Invalid matrix answer."
+msgstr "Invalid matrix answer."
+
+msgid "Invalid role."
+msgstr "Invalid role."
+
+msgid "Is one of (comma-separated)"
+msgstr "Is one of (comma-separated)"
+
+msgid "Items to rank (one per line)"
+msgstr "Items to rank (one per line)"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Latest public active surveys"
+msgstr "Latest public active surveys"
+
+msgid "Leave empty to always show this question."
+msgstr "Leave empty to always show this question."
+
+msgid "Levels & badges"
+msgstr "Levels & badges"
+
+msgid "Log in"
+msgstr "Log in"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Login required."
+msgstr "Login required."
+
+msgid "Male"
+msgstr "Male"
+
+msgid "Manual adjustment"
+msgstr "Manual adjustment"
+
+msgid "Market research"
+msgstr "Market research"
+
+msgid "Matrix"
+msgstr "Matrix"
+
+msgid "Matrix columns (one per line)"
+msgstr "Matrix columns (one per line)"
+
+msgid "Matrix needs rows and at least 2 columns."
+msgstr "Matrix needs rows and at least 2 columns."
+
+msgid "Matrix rows (one per line)"
+msgstr "Matrix rows (one per line)"
+
+msgid "Max must be greater than min."
+msgstr "Max must be greater than min."
+
+msgid "Maximum age"
+msgstr "Maximum age"
+
+msgid "Maximum age must be greater than or equal to minimum age."
+msgstr "Maximum age must be greater than or equal to minimum age."
+
+msgid "Maximum age: %(n)s"
+msgstr "Maximum age: %(n)s"
+
+msgid "Member added."
+msgstr "Member added."
+
+msgid "Member removed."
+msgstr "Member removed."
+
+msgid "Members only"
+msgstr "Members only"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Minimum age"
+msgstr "Minimum age"
+
+msgid "Minimum age: %(n)s"
+msgstr "Minimum age: %(n)s"
+
+msgid "Minimum level"
+msgstr "Minimum level"
+
+msgid "Minimum level: %(n)s"
+msgstr "Minimum level: %(n)s"
+
+msgid "Minimum trust score"
+msgstr "Minimum trust score"
+
+msgid "Minimum trust: %(n)s"
+msgstr "Minimum trust: %(n)s"
+
+msgid "Moderator"
+msgstr "Moderator"
+
+msgid "Multi-line text"
+msgstr "Multi-line text"
+
+msgid "Multiple choice"
+msgstr "Multiple choice"
+
+msgid "My surveys"
+msgstr "My surveys"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "New password"
+msgstr "New password"
+
+msgid "Newest"
+msgstr "Newest"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "No badges yet. Complete surveys and level up to unlock them."
+msgstr "No badges yet. Complete surveys and level up to unlock them."
+
+msgid ""
+"No public active surveys match. Publish a survey (draft → add questions → "
+"Publish) to list it here for everyone."
+msgstr ""
+"No public active surveys match. Publish a survey (draft → add questions → "
+"Publish) to list it here for everyone."
+
+msgid "No questions yet."
+msgstr "No questions yet."
+
+msgid "No responses yet."
+msgstr "No responses yet."
+
+msgid "No surveys match."
+msgstr "No surveys match."
+
+msgid "No surveys yet."
+msgstr "No surveys yet."
+
+msgid "No user with that email. They must register first."
+msgstr "No user with that email. They must register first."
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Oldest"
+msgstr "Oldest"
+
+msgid "Only company members can take this survey."
+msgstr "Only company members can take this survey."
+
+msgid ""
+"Only company owners/moderators can create surveys. Create or join a company "
+"first."
+msgstr ""
+"Only company owners/moderators can create surveys. Create or join a company "
+"first."
+
+msgid "Only draft surveys can be published."
+msgstr "Only draft surveys can be published."
+
+msgid "Only members of this company can take this survey."
+msgstr "Only members of this company can take this survey."
+
+msgid "Other"
+msgstr "Other"
+
+msgid "Owner"
+msgstr "Owner"
+
+msgid "Owners export results and track basic analytics."
+msgstr "Owners export results and track basic analytics."
+
+msgid "Owners publish, track analytics, and export results as CSV."
+msgstr "Owners publish, track analytics, and export results as CSV."
+
+msgid "Owning company. Null only for limited Person-created surveys."
+msgstr "Owning company. Null only for limited Person-created surveys."
+
+msgid "Pagination"
+msgstr "Pagination"
+
+msgid "Paid"
+msgstr "Paid"
+
+msgid "Paid survey (can reward points)"
+msgstr "Paid survey (can reward points)"
+
+msgid "Paid survey rewards"
+msgstr "Paid survey rewards"
+
+msgid "Paid surveys may grant points. Free surveys grant XP only."
+msgstr "Paid surveys may grant points. Free surveys grant XP only."
+
+msgid "Participant"
+msgstr "Participant"
+
+msgid "Participants complete surveys and earn XP (and points on paid ones)."
+msgstr "Participants complete surveys and earn XP (and points on paid ones)."
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Paused"
+msgstr "Paused"
+
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Permissions"
+msgstr "Permissions"
+
+msgid "Person"
+msgstr "Person"
+
+msgid "Personal info"
+msgstr "Personal info"
+
+msgid "Please answer all visible required questions."
+msgstr "Please answer all visible required questions."
+
+msgid "Please log in to take this survey."
+msgstr "Please log in to take this survey."
+
+msgid "Please set your date of birth in your profile."
+msgstr "Please set your date of birth in your profile."
+
+msgid "Please set your gender in your profile."
+msgstr "Please set your gender in your profile."
+
+msgid "Points"
+msgstr "Points"
+
+msgid ""
+"Points given to participant on successful completion (paid surveys only)."
+msgstr ""
+"Points given to participant on successful completion (paid surveys only)."
+
+msgid "Politics / public opinion"
+msgstr "Politics / public opinion"
+
+msgid "Prefer not to say"
+msgstr "Prefer not to say"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Pricing"
+msgstr "Pricing"
+
+msgid "Private"
+msgstr "Private"
+
+msgid "Private (invite / targeted only)"
+msgstr "Private (invite / targeted only)"
+
+msgid "Private · not on Discover"
+msgstr "Private · not on Discover"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Profile completed"
+msgstr "Profile completed"
+
+msgid "Profile information"
+msgstr "Profile information"
+
+msgid "Profile settings"
+msgstr "Profile settings"
+
+msgid "Profile updated."
+msgstr "Profile updated."
+
+msgid "Progress will appear after your first activity."
+msgstr "Progress will appear after your first activity."
+
+msgid "Provide a value for this condition."
+msgstr "Provide a value for this condition."
+
+msgid "Provide at least 2 choices."
+msgstr "Provide at least 2 choices."
+
+msgid "Provide at least 2 items to rank."
+msgstr "Provide at least 2 items to rank."
+
+msgid "Pts"
+msgstr "Pts"
+
+msgid "Public"
+msgstr "Public"
+
+msgid "Public (discoverable)"
+msgstr "Public (discoverable)"
+
+msgid ""
+"Public surveys appear on Discover. Private surveys are invite/targeted only."
+msgstr ""
+"Public surveys appear on Discover. Private surveys are invite/targeted only."
+
+msgid "Public surveys live"
+msgstr "Public surveys live"
+
+msgid "Public · Discover"
+msgstr "Public · Discover"
+
+msgid "Publish"
+msgstr "Publish"
+
+msgid "Question added."
+msgstr "Question added."
+
+msgid "Question deleted."
+msgstr "Question deleted."
+
+msgid "Question updated."
+msgstr "Question updated."
+
+msgid "Questions"
+msgstr "Questions"
+
+msgid "Ranking"
+msgstr "Ranking"
+
+msgid "Rate"
+msgstr "Rate"
+
+msgid "Rating (stars / numbers)"
+msgstr "Rating (stars / numbers)"
+
+msgid "Rating max"
+msgstr "Rating max"
+
+msgid "Rating out of range."
+msgstr "Rating out of range."
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Rejected"
+msgstr "Rejected"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Researcher (legacy)"
+msgstr "Researcher (legacy)"
+
+msgid "Responses"
+msgstr "Responses"
+
+msgid "Role"
+msgstr "Role"
+
+msgid "Role updated."
+msgstr "Role updated."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Scale (e.g. 1–10)"
+msgstr "Scale (e.g. 1–10)"
+
+msgid "Scale / number max"
+msgstr "Scale / number max"
+
+msgid "Scale / number min"
+msgstr "Scale / number min"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search public active surveys."
+msgstr "Search public active surveys."
+
+msgid "Search surveys"
+msgstr "Search surveys"
+
+msgid "Select at least one option."
+msgstr "Select at least one option."
+
+msgid "Show only if question"
+msgstr "Show only if question"
+
+msgid "Single choice"
+msgstr "Single choice"
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "Start a company"
+msgstr "Start a company"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Submit answers"
+msgstr "Submit answers"
+
+msgid "Survey closed"
+msgstr "Survey closed"
+
+msgid "Survey completion"
+msgstr "Survey completion"
+
+msgid "Survey created"
+msgstr "Survey created"
+
+msgid ""
+"Survey created as draft. Add questions, then publish to appear in Discover."
+msgstr ""
+"Survey created as draft. Add questions, then publish to appear in Discover."
+
+msgid "Survey is active and public — it now appears on Discover for everyone."
+msgstr ""
+"Survey is active and public — it now appears on Discover for everyone."
+
+msgid "Survey is active but private — it will not appear on Discover."
+msgstr "Survey is active but private — it will not appear on Discover."
+
+msgid ""
+"Survey is active. Members-only: visible on Discover to company members."
+msgstr ""
+"Survey is active. Members-only: visible on Discover to company members."
+
+msgid "Survey must belong to a company."
+msgstr "Survey must belong to a company."
+
+msgid "Survey updated."
+msgstr "Survey updated."
+
+msgid "Surveys created"
+msgstr "Surveys created"
+
+msgid "Surveys taken"
+msgstr "Surveys taken"
+
+msgid "Surveys that reward participation"
+msgstr "Surveys that reward participation"
+
+msgid "Suspended"
+msgstr "Suspended"
+
+msgid "Take"
+msgstr "Take"
+
+msgid "Take survey"
+msgstr "Take survey"
+
+msgid "Team"
+msgstr "Team"
+
+msgid "Text (short / long)"
+msgstr "Text (short / long)"
+
+msgid "Thank you!"
+msgstr "Thank you!"
+
+msgid "Thank you! Your responses have been recorded."
+msgstr "Thank you! Your responses have been recorded."
+
+msgid "This private survey requires login."
+msgstr "This private survey requires login."
+
+msgid "This question is required."
+msgstr "This question is required."
+
+msgid "This survey is frozen and can no longer be edited."
+msgstr "This survey is frozen and can no longer be edited."
+
+msgid "This survey is frozen or no longer a draft and cannot be edited."
+msgstr "This survey is frozen or no longer a draft and cannot be edited."
+
+msgid ""
+"This survey is live on Discover for other accounts (unless members-only "
+"targeting applies)."
+msgstr ""
+"This survey is live on Discover for other accounts (unless members-only "
+"targeting applies)."
+
+msgid "This survey is restricted to company members."
+msgstr "This survey is restricted to company members."
+
+msgid "This survey is targeted to a different audience."
+msgstr "This survey is targeted to a different audience."
+
+msgid "This user is already a member of the company."
+msgstr "This user is already a member of the company."
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Title, description, category…"
+msgstr "Title, description, category…"
+
+msgid "Toggle theme"
+msgstr "Toggle theme"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Total XP"
+msgstr "Total XP"
+
+msgid "Trust score"
+msgstr "Trust score"
+
+msgid "Type & verification"
+msgstr "Type & verification"
+
+msgid "UX / usability"
+msgstr "UX / usability"
+
+msgid "Update password"
+msgstr "Update password"
+
+msgid ""
+"Update survey information. Questions are managed on the survey detail page."
+msgstr ""
+"Update survey information. Questions are managed on the survey detail page."
+
+msgid "Used for single/multiple choice and ranking items."
+msgstr "Used for single/multiple choice and ranking items."
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Value out of range."
+msgstr "Value out of range."
+
+msgid "View all"
+msgstr "View all"
+
+msgid "Viewer"
+msgstr "Viewer"
+
+msgid "Was answered"
+msgstr "Was answered"
+
+msgid "Was not answered"
+msgstr "Was not answered"
+
+msgid "Welcome to SURVERA!"
+msgstr "Welcome to SURVERA!"
+
+msgid ""
+"XP builds levels and badges. Points come only from completing paid surveys."
+msgstr ""
+"XP builds levels and badges. Points come only from completing paid surveys."
+
+msgid "Yes / No"
+msgstr "Yes / No"
+
+msgid "You are not in any company yet."
+msgstr "You are not in any company yet."
+
+msgid "You do not have permission to edit this survey."
+msgstr "You do not have permission to edit this survey."
+
+msgid "You do not meet the age range for this survey."
+msgstr "You do not meet the age range for this survey."
+
+msgid "You do not meet the minimum age for this survey."
+msgstr "You do not meet the minimum age for this survey."
+
+msgid "You need level %(n)s or higher to take this survey."
+msgstr "You need level %(n)s or higher to take this survey."
+
+msgid "Your trust score is too low for this survey."
+msgstr "Your trust score is too low for this survey."
+
+msgid "allow anonymous"
+msgstr "allow anonymous"
+
+msgid "category"
+msgstr "category"
+
+msgid "companies"
+msgstr "companies"
+
+msgid "company"
+msgstr "company"
+
+msgid "date of birth"
+msgstr "date of birth"
+
+msgid "description"
+msgstr "description"
+
+msgid "email address"
+msgstr "email address"
+
+msgid "expires at"
+msgstr "expires at"
+
+msgid "gender"
+msgstr "gender"
+
+msgid "help text"
+msgstr "help text"
+
+msgid "is frozen"
+msgstr "is frozen"
+
+msgid "logo"
+msgstr "logo"
+
+msgid "name"
+msgstr "name"
+
+msgid "order"
+msgstr "order"
+
+msgid "paid survey"
+msgstr "paid survey"
+
+msgid "points reward"
+msgstr "points reward"
+
+msgid "pts"
+msgstr "pts"
+
+msgid "q"
+msgstr "q"
+
+msgid "question"
+msgstr "question"
+
+msgid "question text"
+msgstr "question text"
+
+msgid "questions"
+msgstr "questions"
+
+msgid "required"
+msgstr "required"
+
+msgid "response target"
+msgstr "response target"
+
+msgid "slug"
+msgstr "slug"
+
+msgid "survey"
+msgstr "survey"
+
+msgid "surveys"
+msgstr "surveys"
+
+msgid "targeting"
+msgstr "targeting"
+
+msgid "title"
+msgstr "title"
+
+msgid "trust score"
+msgstr "trust score"
+
+msgid "user"
+msgstr "user"
+
+msgid "users"
+msgstr "users"
+
+msgid "—"
+msgstr "—"
+
+msgid "≤ number"
+msgstr "≤ number"
+
+msgid "≥ number"
+msgstr "≥ number"
+
+msgid "%(counter)s public survey"
+msgid_plural "%(counter)s public surveys"
+msgstr[0] "%(counter)s public survey"
+msgstr[1] "%(counter)s public surveys"
+
+msgid "Leaderboard"
+msgstr "Leaderboard"
+
+msgid "Reputation"
+msgstr "Reputation"
+
+msgid "Email digest"
+msgstr "Email digest"
+
+msgid "Periodic summary of unread notifications. Team invites still send immediately."
+msgstr "Periodic summary of unread notifications. Team invites still send immediately."
+
+msgid "Response status"
+msgstr "Response status"
+
+msgid "Completions — last %(n)s days"
+msgstr "Completions — last %(n)s days"
+
+msgid "Target progress"
+msgstr "Target progress"
+
+msgid "Per question"
+msgstr "Per question"
+
+msgid "No responses yet."
+msgstr "No responses yet."
+
+msgid "Unlocked"
+msgstr "Unlocked"
+
+msgid "Locked"
+msgstr "Locked"
+
+msgid "Load more"
+msgstr "Load more"
+
+msgid "Outside top 100"
+msgstr "Outside top 100"
+
+msgid "SURVERA activity digest (%(n)d unread)"
+msgstr "SURVERA activity digest (%(n)d unread)"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "You"
+msgstr "You"

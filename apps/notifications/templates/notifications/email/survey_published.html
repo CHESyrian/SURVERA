@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>SURVERA</title></head>
+<body style="font-family: system-ui, sans-serif; line-height: 1.5; color: #0f172a;">
+  <p>Hi {{ user.username|default:user.email }},</p>
+  <p>
+    <strong>{{ company_name }}</strong> published a survey you can take:
+    <strong>{{ survey_title }}</strong>
+  </p>
+  {% if points_reward %}
+  <p>Reward: <strong>{{ points_reward }} points</strong> on completion.</p>
+  {% endif %}
+  {% if body %}<p>{{ body }}</p>{% endif %}
+  <p>
+    <a href="{{ action_url }}" style="display:inline-block;padding:0.6rem 1rem;background:#2563eb;color:#fff;text-decoration:none;border-radius:0.5rem;">
+      Take survey
+    </a>
+  </p>
+  <p style="color:#64748b;font-size:0.85rem;">— {{ site_name }}</p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Responses" %} · {{ survey.title }}{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Responses" %}</h1>
+    <p class="sv-muted mb-0">{{ survey.title }}</p>
+  </div>
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+    <a href="{% url 'surveys:detail' survey.pk %}" class="btn btn-ghost btn-sm">{% trans "Back" %}</a>
+    <a href="{% url 'responses:export_csv' survey.pk %}" class="btn btn-primary btn-sm">{% trans "Export CSV" %}</a>
+  </div>
+</div>
+<p class="sv-muted">{% trans "Completed" %}: {{ completed_count }}</p>
+<p class="sv-muted small">{% trans "CSV export does not include participant personal data (email, name)." %}</p>
+<div class="sv-card" style="padding:0;overflow:hidden;">
+<table class="sv-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>{% trans "Participant" %}</th>
+      <th>{% trans "Status" %}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in responses %}
+    <tr>
+      <td>{{ r.pk }}</td>
+      <td>{% if r.participant %}{{ r.participant.email }}{% else %}{% trans "Anonymous" %}{% endif %}</td>
+      <td>{{ r.get_status_display }}</td>
+      <td style="text-align:end;white-space:nowrap;">
+        <a href="{% url 'responses:detail' r.pk %}" class="btn btn-ghost btn-sm">{% trans "View answers" %}</a>
+        {% if r.participant_id %}
+        <a href="{% url 'responses:report' r.pk %}" class="btn btn-ghost btn-sm">{% trans "Report" %}</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">{% trans "No responses yet." %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

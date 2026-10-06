@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SURVERA digest</title>
+</head>
+<body style="font-family: system-ui, sans-serif; line-height: 1.5; color: #0f172a;">
+  <p>Hi{% if user.username %} {{ user.username }}{% endif %},</p>
+  <p>
+    You have <strong>{{ unread_total }}</strong> unread notification{{ unread_total|pluralize }} on SURVERA.
+    {% if frequency == "weekly" %}Here is your weekly summary:{% else %}Here is your daily summary:{% endif %}
+  </p>
+  <ul>
+    {% for n in items %}
+    <li style="margin-bottom: 0.65rem;">
+      <strong>{{ n.title }}</strong>
+      {% if n.body %}<br><span style="color:#64748b;">{{ n.body|truncatechars:160 }}</span>{% endif %}
+      {% if n.link %}<br><a href="{{ site_url }}{{ n.link }}">Open</a>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% if unread_total > items|length %}
+  <p style="color:#64748b;">…and more in your inbox.</p>
+  {% endif %}
+  <p><a href="{{ inbox_url }}">View all notifications</a></p>
+  <p style="color:#94a3b8;font-size:0.85rem;">
+    You can change digest frequency under Profile → Notification preferences.
+  </p>
+</body>
+</html>

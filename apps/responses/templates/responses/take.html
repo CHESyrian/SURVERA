@@ -1,0 +1,441 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ survey.title }} · {% trans "Take survey" %}{% endblock %}
+
+{% block content %}
+<div class="sv-take" style="max-width:720px;margin:0 auto;">
+  <div class="sv-page-head">
+    <div>
+      <h1 class="h3 mb-1">{{ survey.title }}</h1>
+      {% if survey.description %}
+      <p class="sv-muted mb-0">{{ survey.description }}</p>
+      {% endif %}
+    </div>
+    <div class="d-flex flex-wrap gap-1">
+      {% if survey.is_paid and survey.points_reward %}
+      <span class="sv-chip sv-chip-paid">+{{ survey.points_reward }} {% trans "pts" %}</span>
+      {% else %}
+      <span class="sv-chip sv-chip-free">{% trans "Free" %}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <form method="post" class="sv-take-form" id="take-form" novalidate>
+    {% csrf_token %}
+
+    {% for q in questions %}
+    {% with cfg=q.config %}
+    <div class="q-card" data-qid="{{ q.id }}" data-qtype="{{ q.type }}"
+         {% if q.conditions %}data-has-conditions="1"{% endif %}>
+      <div class="q-head">
+        <p class="q-title mb-1">
+          <strong>{{ forloop.counter }}. {{ q.text }}</strong>
+          {% if q.is_required %}<span class="q-required" title="{% trans 'Required' %}">*</span>{% endif %}
+        </p>
+        {% if q.help_text %}
+        <p class="sv-muted small mb-2">{{ q.help_text }}</p>
+        {% endif %}
+      </div>
+
+      {% if errors %}
+        {% for eid, emsg in errors.items %}
+          {% if eid == q.id %}<div class="q-error mb-2">{{ emsg }}</div>{% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {# ========== TEXT ========== #}
+      {% if q.type == "text" %}
+        {% if cfg.multiline %}
+        <textarea class="form-control" name="q_{{ q.id }}" rows="4"
+                  placeholder="{% trans 'Your answer' %}"></textarea>
+        {% else %}
+        <input class="form-control" type="text" name="q_{{ q.id }}"
+               placeholder="{% trans 'Your answer' %}">
+        {% endif %}
+
+      {# ========== YES / NO ========== #}
+      {% elif q.type == "yes_no" %}
+        <div class="sv-choice-list sv-yesno">
+          {% if cfg.choices %}
+            {% for c in cfg.choices %}
+            <label class="sv-choice">
+              <input type="radio" name="q_{{ q.id }}" value="{{ c }}">
+              <span>{{ c }}</span>
+            </label>
+            {% endfor %}
+          {% else %}
+            <label class="sv-choice">
+              <input type="radio" name="q_{{ q.id }}" value="Yes">
+              <span>{% trans "Yes" %}</span>
+            </label>
+            <label class="sv-choice">
+              <input type="radio" name="q_{{ q.id }}" value="No">
+              <span>{% trans "No" %}</span>
+            </label>
+          {% endif %}
+        </div>
+
+      {# ========== SINGLE CHOICE ========== #}
+      {% elif q.type == "single_choice" %}
+        <div class="sv-choice-list">
+          {% for c in cfg.choices %}
+          <label class="sv-choice">
+            <input type="radio" name="q_{{ q.id }}" value="{{ c }}">
+            <span>{{ c }}</span>
+          </label>
+          {% empty %}
+          <p class="sv-muted small">{% trans "No options configured." %}</p>
+          {% endfor %}
+        </div>
+
+      {# ========== MULTIPLE CHOICE ========== #}
+      {% elif q.type == "multiple_choice" %}
+        <div class="sv-choice-list">
+          {% for c in cfg.choices %}
+          <label class="sv-choice">
+            <input type="checkbox" name="q_{{ q.id }}" value="{{ c }}">
+            <span>{{ c }}</span>
+          </label>
+          {% empty %}
+          <p class="sv-muted small">{% trans "No options configured." %}</p>
+          {% endfor %}
+        </div>
+
+      {# ========== RATING (stars) ========== #}
+      {% elif q.type == "rating" %}
+        {% with max_r=cfg.max|default:5 %}
+        <div class="sv-rating" role="group" aria-label="{% trans 'Rating' %}">
+          {% for i in "12345678910" %}
+            {% if forloop.counter <= max_r %}
+            <label class="sv-rating-star">
+              <input type="radio" name="q_{{ q.id }}" value="{{ forloop.counter }}">
+              <span class="sv-star" aria-hidden="true">★</span>
+              <span class="visually-hidden">{{ forloop.counter }}</span>
+            </label>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <p class="sv-muted small mt-1 mb-0">{% blocktrans with n=max_r %}Select 1 – {{ n }}{% endblocktrans %}</p>
+        {% endwith %}
+
+      {# ========== SCALE ========== #}
+      {% elif q.type == "scale" %}
+        {% with smin=cfg.min|default:1 smax=cfg.max|default:10 %}
+        <div class="sv-scale">
+          <div class="sv-scale-labels">
+            <span>{{ smin }}</span>
+            <strong class="sv-scale-value" data-scale-out="q_{{ q.id }}">—</strong>
+            <span>{{ smax }}</span>
+          </div>
+          <input class="form-range sv-scale-range" type="range"
+                 name="q_{{ q.id }}"
+                 id="scale_{{ q.id }}"
+                 min="{{ smin }}" max="{{ smax }}" step="1"
+                 value="{{ smin }}"
+                 data-scale-input="q_{{ q.id }}"
+                 oninput="var o=this.closest('.sv-scale').querySelector('[data-scale-out]'); if(o) o.textContent=this.value;">
+          <div class="sv-scale-hint sv-muted small">
+            {% blocktrans with a=smin b=smax %}Drag or use the slider ({{ a }} – {{ b }}){% endblocktrans %}
+          </div>
+        </div>
+        {% endwith %}
+
+      {# ========== NUMBER ========== #}
+      {% elif q.type == "number" %}
+        <input class="form-control" type="number" name="q_{{ q.id }}"
+               {% if cfg.min != None %}min="{{ cfg.min }}"{% endif %}
+               {% if cfg.max != None %}max="{{ cfg.max }}"{% endif %}
+               step="any"
+               inputmode="decimal"
+               placeholder="{% trans 'Enter a number' %}">
+        {% if cfg.min != None or cfg.max != None %}
+        <p class="sv-muted small mt-1 mb-0">
+          {% if cfg.min != None and cfg.max != None %}
+            {% blocktrans with a=cfg.min b=cfg.max %}Range: {{ a }} – {{ b }}{% endblocktrans %}
+          {% elif cfg.min != None %}
+            {% blocktrans with a=cfg.min %}Minimum: {{ a }}{% endblocktrans %}
+          {% else %}
+            {% blocktrans with b=cfg.max %}Maximum: {{ b }}{% endblocktrans %}
+          {% endif %}
+        </p>
+        {% endif %}
+
+      {# ========== DATE ========== #}
+      {% elif q.type == "date" %}
+        <input class="form-control" type="date" name="q_{{ q.id }}">
+
+      {# ========== RANKING ========== #}
+      {% elif q.type == "ranking" %}
+        <p class="sv-muted small mb-2">{% trans "Assign a rank to each item (1 = highest priority)." %}</p>
+        <div class="sv-ranking" data-ranking="q_{{ q.id }}">
+          {% for item in cfg.items %}
+          <div class="sv-rank-row">
+            <span class="sv-rank-label">{{ item }}</span>
+            <select class="form-select form-select-sm sv-rank-select" data-rank-item="{{ item }}">
+              <option value="">—</option>
+              {% for opt in cfg.items %}
+              <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          {% empty %}
+          <p class="sv-muted small">{% trans "No items configured." %}</p>
+          {% endfor %}
+          <input type="hidden" name="q_{{ q.id }}" value="" data-rank-hidden>
+        </div>
+
+      {# ========== MATRIX ========== #}
+      {% elif q.type == "matrix" %}
+        <div class="table-responsive">
+          <table class="table sv-matrix-table mb-0">
+            <thead>
+              <tr>
+                <th scope="col" class="border-0"></th>
+                {% for col in cfg.columns %}
+                <th scope="col" class="text-center small border-0">{{ col }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in cfg.rows %}
+              <tr>
+                <th scope="row" class="small align-middle">{{ row }}</th>
+                {% for col in cfg.columns %}
+                <td class="text-center align-middle">
+                  <input type="radio" class="form-check-input" name="q_{{ q.id }}__{{ row }}" value="{{ col }}"
+                         aria-label="{{ row }} — {{ col }}">
+                </td>
+                {% endfor %}
+              </tr>
+              {% empty %}
+              <tr><td colspan="20" class="sv-muted small">{% trans "No rows configured." %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      {# ========== FALLBACK ========== #}
+      {% else %}
+        <input class="form-control" type="text" name="q_{{ q.id }}"
+               placeholder="{% trans 'Your answer' %}">
+      {% endif %}
+    </div>
+    {% endwith %}
+    {% endfor %}
+
+    <div class="sv-take-actions">
+      <button type="submit" class="btn btn-primary btn-lg">{% trans "Submit answers" %}</button>
+      <a href="{% url 'surveys:discover' %}" class="btn btn-ghost">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  // Scale: show current value on load
+  document.querySelectorAll("[data-scale-input]").forEach(function (input) {
+    var out = input.closest(".sv-scale") && input.closest(".sv-scale").querySelector("[data-scale-out]");
+    if (out && input.value !== "") out.textContent = input.value;
+  });
+
+  // Ranking → ordered JSON list for server
+  function syncRanking(root) {
+    var hidden = root.querySelector("[data-rank-hidden]");
+    if (!hidden) return;
+    var pairs = [];
+    root.querySelectorAll(".sv-rank-row").forEach(function (row) {
+      var itemEl = row.querySelector("[data-rank-item]");
+      var sel = row.querySelector(".sv-rank-select");
+      if (!itemEl || !sel || !sel.value) return;
+      pairs.push({ item: itemEl.getAttribute("data-rank-item"), rank: parseInt(sel.value, 10) });
+    });
+    pairs.sort(function (a, b) { return a.rank - b.rank; });
+    hidden.value = JSON.stringify(pairs.map(function (p) { return p.item; }));
+  }
+  document.querySelectorAll("[data-ranking]").forEach(function (root) {
+    root.querySelectorAll(".sv-rank-select").forEach(function (sel) {
+      sel.addEventListener("change", function () { syncRanking(root); });
+    });
+    syncRanking(root);
+  });
+  var form = document.getElementById("take-form");
+  if (form) {
+    form.addEventListener("submit", function () {
+      document.querySelectorAll("[data-ranking]").forEach(syncRanking);
+    });
+  }
+
+  // Rating star hover / selection
+  document.querySelectorAll(".sv-rating").forEach(function (group) {
+    var labels = Array.prototype.slice.call(group.querySelectorAll(".sv-rating-star"));
+    function paint(n) {
+      labels.forEach(function (lab, idx) {
+        lab.classList.toggle("is-on", idx < n);
+      });
+    }
+    labels.forEach(function (lab, idx) {
+      lab.addEventListener("mouseenter", function () { paint(idx + 1); });
+      lab.addEventListener("mouseleave", function () {
+        var checked = group.querySelector("input:checked");
+        paint(checked ? parseInt(checked.value, 10) : 0);
+      });
+      var input = lab.querySelector("input");
+      if (input) input.addEventListener("change", function () { paint(parseInt(input.value, 10)); });
+    });
+  });
+
+  // ========== Conditional questions (client show/hide) ==========
+  var conditionsPayload = [];
+  try {
+    conditionsPayload = {{ conditions_json|default:"[]"|safe }};
+  } catch (e) {
+    conditionsPayload = [];
+  }
+
+  function valuesEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    var na = Number(a), nb = Number(b);
+    if (!isNaN(na) && !isNaN(nb) && String(a).trim() !== "" && String(b).trim() !== "") {
+      if (na === nb) return true;
+    }
+    return String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
+  }
+
+  function readAnswer(qid) {
+    var card = document.querySelector('.q-card[data-qid="' + qid + '"]');
+    if (!card) return undefined;
+    var qtype = card.getAttribute("data-qtype") || "";
+    // radios / yes_no / single / rating
+    var checked = card.querySelector('input[type="radio"]:checked');
+    if (checked) return checked.value;
+    // checkboxes (multiple)
+    var boxes = card.querySelectorAll('input[type="checkbox"]:checked');
+    if (boxes.length) {
+      return Array.prototype.map.call(boxes, function (b) { return b.value; });
+    }
+    // scale / number / text / date / ranking hidden
+    var named = card.querySelector('[name="q_' + qid + '"]');
+    if (named) {
+      if (named.type === "hidden" && named.getAttribute("data-rank-hidden") !== null) {
+        try {
+          var arr = JSON.parse(named.value || "[]");
+          return Array.isArray(arr) && arr.length ? arr : undefined;
+        } catch (e) { return undefined; }
+      }
+      var v = (named.value || "").trim();
+      return v === "" ? undefined : v;
+    }
+    // matrix: any radio under card
+    var matrixChecked = card.querySelectorAll('input[type="radio"]:checked');
+    if (matrixChecked.length) {
+      var obj = {};
+      matrixChecked.forEach(function (inp) {
+        var m = inp.name.match(/__(.+)$/);
+        if (m) obj[m[1]] = inp.value;
+      });
+      return Object.keys(obj).length ? obj : undefined;
+    }
+    return undefined;
+  }
+
+  function matchRule(rule, answersMap) {
+    var sourceId = rule.source_id;
+    var op = rule.op || "eq";
+    var expected = rule.value;
+    var answered = Object.prototype.hasOwnProperty.call(answersMap, sourceId) ||
+                   Object.prototype.hasOwnProperty.call(answersMap, String(sourceId));
+    var value = answersMap[sourceId];
+    if (value === undefined) value = answersMap[String(sourceId)];
+
+    if (op === "answered") {
+      return answered && value !== undefined && value !== null && value !== "" &&
+             !(Array.isArray(value) && value.length === 0);
+    }
+    if (op === "not_answered") {
+      return !answered || value === undefined || value === null || value === "" ||
+             (Array.isArray(value) && value.length === 0);
+    }
+    if (!answered || value === undefined) return false;
+
+    if (op === "eq") return valuesEqual(value, expected);
+    if (op === "neq") return !valuesEqual(value, expected);
+    if (op === "in") {
+      var options = Array.isArray(expected) ? expected : [expected];
+      if (Array.isArray(value)) {
+        return value.some(function (v) {
+          return options.some(function (o) { return valuesEqual(v, o); });
+        });
+      }
+      return options.some(function (o) { return valuesEqual(value, o); });
+    }
+    if (op === "not_in") {
+      var opts = Array.isArray(expected) ? expected : [expected];
+      if (Array.isArray(value)) {
+        return !value.some(function (v) {
+          return opts.some(function (o) { return valuesEqual(v, o); });
+        });
+      }
+      return !opts.some(function (o) { return valuesEqual(value, o); });
+    }
+    if (op === "gte") {
+      var vf = Number(value), ef = Number(expected);
+      return !isNaN(vf) && !isNaN(ef) && vf >= ef;
+    }
+    if (op === "lte") {
+      var vl = Number(value), el = Number(expected);
+      return !isNaN(vl) && !isNaN(el) && vl <= el;
+    }
+    return true;
+  }
+
+  function isVisible(qid, rules, answersMap) {
+    if (!rules || !rules.length) return true;
+    return rules.every(function (r) { return matchRule(r, answersMap); });
+  }
+
+  function applyConditions() {
+    var answersMap = {};
+    document.querySelectorAll(".q-card[data-qid]").forEach(function (card) {
+      var qid = card.getAttribute("data-qid");
+      // Only collect answers from currently visible cards (source questions)
+      // First pass: always read; visibility applied after
+      var val = readAnswer(qid);
+      if (val !== undefined) answersMap[qid] = val;
+      try { answersMap[parseInt(qid, 10)] = val; } catch (e) {}
+    });
+
+    // Rebuild answers only from visible sources in a second pass after first visibility
+    // For simplicity: evaluate all based on raw answers (hidden sources still count if answered)
+    conditionsPayload.forEach(function (entry) {
+      var card = document.querySelector('.q-card[data-qid="' + entry.id + '"]');
+      if (!card) return;
+      var show = isVisible(entry.id, entry.conditions, answersMap);
+      card.style.display = show ? "" : "none";
+      // Disable inputs on hidden questions so they are not submitted / required by browser
+      card.querySelectorAll("input, select, textarea").forEach(function (el) {
+        if (show) {
+          el.disabled = false;
+          el.removeAttribute("data-cond-disabled");
+        } else {
+          el.disabled = true;
+          el.setAttribute("data-cond-disabled", "1");
+        }
+      });
+    });
+  }
+
+  // Bind change/input listeners on all question inputs
+  var takeForm = document.getElementById("take-form");
+  if (takeForm && conditionsPayload.length) {
+    takeForm.addEventListener("change", function () { applyConditions(); });
+    takeForm.addEventListener("input", function () { applyConditions(); });
+    // Initial hide of conditional questions
+    applyConditions();
+  }
+})();
+</script>
+{% endblock %}

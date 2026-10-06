@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ title }} · SURVERA{% endblock %}
+{% block content %}
+<div class="sv-card" style="max-width:720px;margin:0 auto;"
+     x-data="{
+       isPaid: {% if form.is_paid.value %}true{% else %}false{% endif %},
+       membersOnly: {% if form.target_members_only.value %}true{% else %}false{% endif %}
+     }">
+  <h1>{{ title }}</h1>
+  <p class="sv-muted">
+    {% if survey %}
+      {% trans "Update survey information. Questions are managed on the survey detail page." %}
+    {% else %}
+      {% trans "Enter survey information only. You can add questions after saving, then publish when ready." %}
+    {% endif %}
+  </p>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if not survey and is_platform %}
+    <p class="sv-muted small mb-3">{% trans "Company: SURVERA" %}</p>
+    {% elif not survey and company_choices %}
+    <div class="mb-3">
+      <label class="form-label" for="id_company_id">{% trans "Company" %}</label>
+      <select name="company_id" id="id_company_id" class="form-select">
+        {% for c in company_choices %}
+        <option value="{{ c.pk }}" {% if company and c.pk == company.pk %}selected{% endif %}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% elif not survey and company %}
+    <input type="hidden" name="company_id" value="{{ company.pk }}">
+    <p class="sv-muted small">{% blocktrans with name=company.name %}Company: {{ name }}{% endblocktrans %}</p>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+      {{ form.title }}
+      {% if form.title.errors %}<div class="text-danger small">{{ form.title.errors }}</div>{% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+      {{ form.description }}
+      {% if form.description.errors %}<div class="text-danger small">{{ form.description.errors }}</div>{% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+      {{ form.category }}
+      {% if form.category.errors %}<div class="text-danger small">{{ form.category.errors }}</div>{% endif %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.expires_at.id_for_label }}">{{ form.expires_at.label }}</label>
+      {{ form.expires_at }}
+      {% if form.expires_at.errors %}<div class="text-danger small">{{ form.expires_at.errors }}</div>{% endif %}
+    </div>
+
+    {% if form.is_paid %}
+    <div class="border-top pt-3 mt-2 mb-3">
+      <h2 class="h6 mb-3">{% trans "Pricing" %}</h2>
+      <div class="form-check mb-3">
+        <input type="checkbox"
+               name="{{ form.is_paid.name }}"
+               id="{{ form.is_paid.id_for_label }}"
+               class="form-check-input"
+               value="on"
+               x-model="isPaid"
+               {% if form.is_paid.value %}checked{% endif %}>
+        <label class="form-check-label" for="{{ form.is_paid.id_for_label }}">{{ form.is_paid.label }}</label>
+        {% if form.is_paid.help_text %}<div class="form-text">{{ form.is_paid.help_text }}</div>{% endif %}
+        {% if form.is_paid.errors %}<div class="text-danger small">{{ form.is_paid.errors }}</div>{% endif %}
+      </div>
+
+      <div class="mb-3" x-show="isPaid" x-cloak>
+        <label class="form-label" for="{{ form.points_reward.id_for_label }}">{{ form.points_reward.label }}</label>
+        {{ form.points_reward }}
+        {% if form.points_reward.help_text %}<div class="form-text">{{ form.points_reward.help_text }}</div>{% endif %}
+        {% if form.points_reward.errors %}<div class="text-danger small">{{ form.points_reward.errors }}</div>{% endif %}
+      </div>
+
+      {% if form.response_target %}
+      <div class="mb-3" x-show="isPaid" x-cloak>
+        <label class="form-label" for="{{ form.response_target.id_for_label }}">{{ form.response_target.label }}</label>
+        {{ form.response_target }}
+        {% if form.response_target.errors %}<div class="text-danger small">{{ form.response_target.errors }}</div>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if form.visibility %}
+      <div class="mb-3" x-show="isPaid" x-cloak>
+        <label class="form-label" for="{{ form.visibility.id_for_label }}">{{ form.visibility.label }}</label>
+        {{ form.visibility }}
+        {% if form.visibility.errors %}<div class="text-danger small">{{ form.visibility.errors }}</div>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% if form.target_members_only %}
+    <div class="border-top pt-3 mt-2 mb-3">
+      <h2 class="h6 mb-3">{% trans "Audience targeting" %}</h2>
+      <div class="form-check mb-3">
+        <input type="checkbox"
+               name="{{ form.target_members_only.name }}"
+               id="{{ form.target_members_only.id_for_label }}"
+               class="form-check-input"
+               value="on"
+               x-model="membersOnly"
+               {% if form.target_members_only.value %}checked{% endif %}>
+        <label class="form-check-label" for="{{ form.target_members_only.id_for_label }}">{{ form.target_members_only.label }}</label>
+        {% if form.target_members_only.help_text %}<div class="form-text">{{ form.target_members_only.help_text }}</div>{% endif %}
+        {% if form.target_members_only.errors %}<div class="text-danger small">{{ form.target_members_only.errors }}</div>{% endif %}
+      </div>
+
+      <div x-show="!membersOnly" x-cloak>
+        <div class="mb-3">
+          <label class="form-label" for="{{ form.target_min_level.id_for_label }}">{{ form.target_min_level.label }}</label>
+          {{ form.target_min_level }}
+          {% if form.target_min_level.errors %}<div class="text-danger small">{{ form.target_min_level.errors }}</div>{% endif %}
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label" for="{{ form.target_min_age.id_for_label }}">{{ form.target_min_age.label }}</label>
+            {{ form.target_min_age }}
+            {% if form.target_min_age.errors %}<div class="text-danger small">{{ form.target_min_age.errors }}</div>{% endif %}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="{{ form.target_max_age.id_for_label }}">{{ form.target_max_age.label }}</label>
+            {{ form.target_max_age }}
+            {% if form.target_max_age.errors %}<div class="text-danger small">{{ form.target_max_age.errors }}</div>{% endif %}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">{{ form.target_genders.label }}</label>
+          <div class="d-flex flex-wrap gap-3">
+            {% for checkbox in form.target_genders %}
+            <div class="form-check">{{ checkbox.tag }} <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label></div>
+            {% endfor %}
+          </div>
+          {% if form.target_genders.errors %}<div class="text-danger small">{{ form.target_genders.errors }}</div>{% endif %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="{{ form.target_min_trust.id_for_label }}">{{ form.target_min_trust.label }}</label>
+          {{ form.target_min_trust }}
+          {% if form.target_min_trust.help_text %}<div class="form-text">{{ form.target_min_trust.help_text }}</div>{% endif %}
+          {% if form.target_min_trust.errors %}<div class="text-danger small">{{ form.target_min_trust.errors }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      {% if survey %}
+        <a href="{% url 'surveys:detail' survey.pk %}" class="btn btn-ghost">{% trans "Cancel" %}</a>
+      {% else %}
+        <a href="{% url 'surveys:list' %}" class="btn btn-ghost">{% trans "Cancel" %}</a>
+      {% endif %}
+    </div>
+  </form>
+</div>
+<style>
+  [x-cloak] { display: none !important; }
+  .form-check-input { margin-right: 0.4rem; }
+</style>
+{% endblock %}

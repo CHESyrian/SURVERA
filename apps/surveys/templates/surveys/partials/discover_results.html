@@ -1,0 +1,47 @@
+{% load i18n %}
+<div id="discover-results">
+  {% if surveys %}
+  <div class="row g-3">
+    {% for s in surveys %}
+    <div class="col-md-4">
+      <div class="card sv-survey-card h-100">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex flex-wrap gap-1 mb-2">
+            {% if s.is_paid %}
+            <span class="sv-chip sv-chip-paid">{% trans "Paid" %}</span>
+            {% else %}
+            <span class="sv-chip sv-chip-free">{% trans "Free" %}</span>
+            {% endif %}
+            {% if s.category %}<span class="sv-chip">{{ s.category }}</span>{% endif %}
+            {% if s.points_reward %}<span class="sv-chip">{{ s.points_reward }} {% trans "pts" %}</span>{% endif %}
+          </div>
+          <h3 class="h6 mb-1">{{ s.title }}</h3>
+          {% if s.description %}
+          <p class="sv-muted small mb-2" style="flex:1;">{{ s.description|truncatechars:100 }}</p>
+          {% else %}
+          <div style="flex:1;"></div>
+          {% endif %}
+          <div class="d-flex align-items-center justify-content-between gap-2 mt-2">
+            <span class="sv-muted small">
+              {{ s.owner_label }}
+              · {{ s.question_count }} {% trans "q" %}
+            </span>
+            {% if s.id in completed_ids %}
+            <span class="sv-chip">{% trans "Done" %}</span>
+            {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'responses:take' s.pk %}">{% trans "Take survey" %}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="sv-card">
+    <p class="sv-muted mb-0">
+      {% trans "No public active surveys match. Publish a survey (draft → add questions → Publish) to list it here for everyone." %}
+    </p>
+  </div>
+  {% endif %}
+</div>

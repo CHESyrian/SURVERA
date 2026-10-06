@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Response" %} #{{ response_obj.pk }} · {{ survey.title }}{% endblock %}
+{% block content %}
+<div class="sv-page-head">
+  <div>
+    <h1>{% trans "Response" %} #{{ response_obj.pk }}</h1>
+    <p class="sv-muted mb-0">{{ survey.title }}</p>
+  </div>
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+    <a href="{% url 'responses:list' survey.pk %}" class="btn btn-ghost btn-sm">{% trans "All responses" %}</a>
+    <a href="{% url 'surveys:detail' survey.pk %}" class="btn btn-ghost btn-sm">{% trans "Survey" %}</a>
+    {% if response_obj.participant_id %}
+    <a href="{% url 'responses:report' response_obj.pk %}" class="btn btn-ghost btn-sm">{% trans "Report" %}</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="sv-card mb-3">
+  <div class="sv-info-row">
+    <span class="k">{% trans "Status" %}</span>
+    <span class="v">{{ response_obj.get_status_display }}</span>
+  </div>
+  <div class="sv-info-row">
+    <span class="k">{% trans "Participant" %}</span>
+    <span class="v">{% if response_obj.participant %}{{ response_obj.participant.email }}{% else %}{% trans "Anonymous" %}{% endif %}</span>
+  </div>
+  <div class="sv-info-row">
+    <span class="k">{% trans "Started" %}</span>
+    <span class="v">{{ response_obj.started_at }}</span>
+  </div>
+  <div class="sv-info-row">
+    <span class="k">{% trans "Completed" %}</span>
+    <span class="v">{% if response_obj.completed_at %}{{ response_obj.completed_at }}{% else %}—{% endif %}</span>
+  </div>
+</div>
+
+<div class="sv-card" style="padding:0;overflow:hidden;">
+  <div style="padding:0.85rem 1rem;border-bottom:1px solid var(--sv-border,#e5e7eb);">
+    <h2 style="font-size:1.1rem;margin:0;">{% trans "Questions & answers" %}</h2>
+  </div>
+  {% if answer_rows %}
+  <div style="display:flex;flex-direction:column;">
+    {% for row in answer_rows %}
+    <div style="padding:0.85rem 1rem;border-bottom:1px solid var(--sv-border,#f3f4f6);">
+      <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:0.35rem;">
+        <strong>{{ row.question.order }}. {{ row.question.text }}</strong>
+        <span class="sv-muted small">{{ row.question.get_type_display }}</span>
+      </div>
+      {% if row.answer %}
+      {% if row.question.type == "rating" %}
+      <div class="sv-answer-stars" aria-label="{{ row.display_value }}">{{ row.display_value }}</div>
+      {% else %}
+      <div style="white-space:pre-wrap;">{{ row.display_value }}</div>
+      {% endif %}
+      {% else %}
+      <p class="sv-muted mb-0 small">{% trans "No answer" %}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="sv-muted" style="padding:1rem;">{% trans "No questions on this survey." %}</p>
+  {% endif %}
+</div>
+{% endblock %}
